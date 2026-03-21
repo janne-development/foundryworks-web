@@ -213,28 +213,6 @@ body.rtl .feature-list li { border-left: none; border-right: 3px solid var(–or
 .admin-trigger:hover { color: var(–white); }
 .badge-count { background: var(–orange); color: white; border-radius: 10px; padding: 0.15rem 0.5rem; font-size: 0.75rem; font-weight: 700; margin-left: 0.5rem; }
 
-/* SEARCH */
-.search-bar { background: var(–white); border: 1px solid var(–border); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem; display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 1rem; align-items: end; }
-.search-bar .form-group { margin: 0; }
-.search-bar label { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(–text-muted); margin-bottom: 0.4rem; }
-.search-bar select, .search-bar input { width: 100%; padding: 0.6rem 0.9rem; border: 1.5px solid var(–border); border-radius: 4px; font-family: ‘DM Sans’, sans-serif; font-size: 0.92rem; color: var(–text); background: var(–bg); outline: none; }
-.search-bar select:focus, .search-bar input:focus { border-color: var(–navy); }
-.btn-search { background: var(–navy); color: var(–white); padding: 0.65rem 1.5rem; border-radius: 4px; border: none; font-family: ‘DM Sans’, sans-serif; font-weight: 600; cursor: pointer; white-space: nowrap; font-size: 0.92rem; transition: background 0.2s; height: fit-content; }
-.btn-search:hover { background: #1B4070; }
-.btn-clear { background: none; border: none; color: var(–text-muted); font-size: 0.82rem; cursor: pointer; font-family: ‘DM Sans’, sans-serif; padding: 0.4rem 0; text-decoration: underline; display: block; margin-top: 0.5rem; }
-.results-count { font-size: 0.85rem; color: var(–text-muted); margin-bottom: 1.5rem; font-weight: 500; }
-.job-card-pub { background: var(–white); border: 1px solid var(–border); border-left: 3px solid var(–orange); border-radius: 8px; padding: 1.8rem 2rem; margin-bottom: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
-.job-card-pub:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(15,46,80,0.09); }
-.job-card-pub-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.8rem; }
-.job-card-pub h3 { font-family: ‘Fraunces’, serif; font-size: 1.15rem; font-weight: 700; color: var(–navy); margin: 0; }
-.job-type-badge { background: #fff3e6; color: var(–orange); font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 20px; white-space: nowrap; }
-.job-meta-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
-.job-meta-tag { font-size: 0.82rem; color: var(–text-muted); display: flex; align-items: center; gap: 0.3rem; }
-.level-badge { font-size: 0.75rem; background: #eef3f9; color: var(–navy); padding: 0.2rem 0.6rem; border-radius: 12px; font-weight: 600; }
-.sector-badge { font-size: 0.75rem; background: #f0f4f9; color: var(–navy-light); padding: 0.2rem 0.6rem; border-radius: 12px; font-weight: 500; }
-.job-desc { color: var(–text-muted); font-size: 0.93rem; line-height: 1.65; margin-bottom: 1.2rem; }
-@media (max-width: 700px) { .search-bar { grid-template-columns: 1fr; } }
-
 </style>
 </head>
 <body>
@@ -1041,10 +1019,9 @@ function setLang(lang) {
 
 function buildLangDropdown() {
   const dd = document.getElementById('langDropdown');
-  dd.innerHTML = Object.entries(languages).map(function(entry){
-    var code = entry[0]; var l = entry[1];
-    return '<div class="lang-option ' + (code === currentLang ? 'active' : '') + '" onclick="setLang(\'' + code + '\')">' + l.flag + ' ' + l.label + '</div>';
-  }).join('');
+  dd.innerHTML = Object.entries(languages).map(([code, l]) =>
+    `<div class="lang-option ${code === currentLang ? 'active' : ''}" onclick="setLang('${code}')">${l.flag} ${l.label}</div>`
+  ).join('');
 }
 
 function renderNav() {
@@ -1184,6 +1161,28 @@ function renderPage(page) {
 
   else if (page === 'jobs') {
     const j = t[lang].jobs;
+    const jobCards = jobs.length > 0
+      ? jobs.map(jb => `
+        <div class="card" style="border-left:3px solid var(--orange);border-radius:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">
+            <h3 style="margin:0;">${jb.title}</h3>
+            <span style="background:#fff3e6;color:var(--orange);font-size:0.78rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:20px;">${jb.type}</span>
+          </div>
+          <div style="display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center;">
+            <span style="font-size:0.85rem;color:var(--text-muted);">📍 ${jb.location}</span>
+            ${jb.sector ? '<span style="font-size:0.82rem;color:var(--text-muted);">' + jb.sector + '</span>' : ''}
+            ${jb.level ? '<span style="font-size:0.78rem;background:#eef3f9;color:var(--navy);padding:0.2rem 0.6rem;border-radius:12px;font-weight:600;">' + jb.level + '</span>' : ''}
+            ${jb.deadline ? '<span style="font-size:0.8rem;color:var(--text-muted);">⏳ ' + jb.deadline + '</span>' : ''}
+          </div>
+          <p style="color:var(--text-muted);font-size:0.93rem;line-height:1.6;">${jb.description}</p>
+          <a class="card-link" onclick="showPage('contact')" style="margin-top:1.2rem;display:inline-block;">Apply now →</a>
+        </div>`).join('')
+      : `<div class="no-jobs">
+          <h3>${j.noH}</h3>
+          <p>${j.noP}</p><br>
+          <a class="btn-primary" onclick="showPage('contact')" style="margin-top:1rem;">${j.noBtn}</a>
+        </div>`;
+
     html = `
     <div class="page-hero"><div class="page-hero-content">
       <span class="eyebrow">${j.eyebrow}</span>
@@ -1191,32 +1190,9 @@ function renderPage(page) {
       <p>${j.sub}</p>
     </div></div>
     <div class="content-section">
-      <div class="search-bar">
-        <div class="form-group">
-          <label>Sektori</label>
-          <select id="filterSector" onchange="filterJobs()">
-            <option value="">Kaikki sektorit</option>
-            ${JOB_DATA.sectors.map(function(s){ return '<option value="' + s.id + '">' + s.emoji + ' ' + s.name + '</option>'; }).join('')}
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Tehtävänimike</label>
-          <select id="filterRole" onchange="filterJobs()">
-            <option value="">Kaikki tehtävät</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Sijainti</label>
-          <input type="text" id="filterLocation" placeholder="esim. Helsinki" oninput="filterJobs()">
-        </div>
-        <button class="btn-search" onclick="filterJobs()">Hae</button>
-      </div>
-      <button class="btn-clear" onclick="clearFilters()">Tyhjennä haku</button>
-      <div class="results-count" id="resultsCount"></div>
-      <div id="jobResults"></div>
+      <div class="cards">${jobCards}</div>
     </div>
     ${footer(lang)}`;
-    setTimeout(function() { initJobSearch(); }, 0);
   }
 
   else if (page === 'contact') {
@@ -1259,133 +1235,6 @@ const appDiv = document.getElementById(‘app’);
 appDiv.innerHTML = `<div class="page active">${html}</div>`;
 }
 
-// ── JOB SEARCH ──────────────────────────────────────────────────
-function initJobSearch() {
-const sectorSel = document.getElementById(‘filterSector’);
-if (sectorSel) {
-sectorSel.addEventListener(‘change’, function() {
-updateFilterRoleDropdown();
-filterJobs();
-});
-}
-filterJobs();
-}
-
-function updateFilterRoleDropdown() {
-const sectorId = document.getElementById(‘filterSector’).value;
-const roleSel = document.getElementById(‘filterRole’);
-if (!roleSel) return;
-const sector = JOB_DATA.sectors.find(function(s) { return s.id === sectorId; });
-if (!sector) {
-roleSel.innerHTML = ‘<option value="">Kaikki tehtävät</option>’;
-} else {
-roleSel.innerHTML = ‘<option value="">Kaikki tehtävät</option>’ +
-sector.roles.map(function(r) { return ‘<option value="' + r + '">’ + r + ‘</option>’; }).join(’’);
-}
-}
-
-function filterJobs() {
-const sectorVal = (document.getElementById(‘filterSector’) || {}).value || ‘’;
-const roleVal = ((document.getElementById(‘filterRole’) || {}).value || ‘’).toLowerCase();
-const locVal = ((document.getElementById(‘filterLocation’) || {}).value || ‘’).toLowerCase();
-
-let filtered = jobs.filter(function(j) {
-const matchSector = !sectorVal || (j.sectorId === sectorVal);
-const matchRole = !roleVal || j.title.toLowerCase().includes(roleVal);
-const matchLoc = !locVal || j.location.toLowerCase().includes(locVal);
-return matchSector && matchRole && matchLoc;
-});
-
-renderJobResults(filtered);
-}
-
-function clearFilters() {
-var s = document.getElementById(‘filterSector’);
-var r = document.getElementById(‘filterRole’);
-var l = document.getElementById(‘filterLocation’);
-if (s) s.value = ‘’;
-if (r) r.innerHTML = ‘<option value="">Kaikki tehtävät</option>’;
-if (l) l.value = ‘’;
-filterJobs();
-}
-
-function renderJobResults(list) {
-const container = document.getElementById(‘jobResults’);
-const countEl = document.getElementById(‘resultsCount’);
-if (!container) return;
-
-if (countEl) {
-countEl.textContent = list.length > 0
-? list.length + ’ ilmoitusta löytyi’
-: ‘’;
-}
-
-if (list.length === 0) {
-container.innerHTML = ‘<div class="no-jobs"><h3>Ei tuloksia.</h3><p>Kokeile eri hakuehtoja tai <a style="color:var(--orange);cursor:pointer;" onclick="clearFilters()">tyhjennä haku</a>.</p></div>’;
-return;
-}
-
-container.innerHTML = list.map(function(jb) {
-return ‘<div class="job-card-pub">’ +
-‘<div class="job-card-pub-header">’ +
-‘<h3>’ + jb.title + ‘</h3>’ +
-‘<span class="job-type-badge">’ + jb.type + ‘</span>’ +
-‘</div>’ +
-‘<div class="job-meta-row">’ +
-‘<span class="job-meta-tag">📍 ’ + jb.location + ‘</span>’ +
-(jb.sector ? ‘<span class="sector-badge">’ + jb.sector + ‘</span>’ : ‘’) +
-(jb.level ? ‘<span class="level-badge">’ + jb.level + ‘</span>’ : ‘’) +
-(jb.deadline ? ‘<span class="job-meta-tag">⏳ ’ + jb.deadline + ‘</span>’ : ‘’) +
-‘</div>’ +
-‘<p class="job-desc">’ + jb.description + ‘</p>’ +
-‘<a class="card-link" onclick="showPage(\'contact\')" style="display:inline-block;">Hae paikkaa →</a>’ +
-‘</div>’;
-}).join(’’);
-}
-// ────────────────────────────────────────────────────────────────
-
-// ── JOB DATA ────────────────────────────────────────────────────
-const JOB_DATA = {
-experience_levels: [
-{ id: “trainee”, label: “Harjoittelija” },
-{ id: “junior”, label: “Junior” },
-{ id: “experienced”, label: “Kokenut” },
-{ id: “senior”, label: “Senior” },
-{ id: “expert”, label: “Asiantuntija” },
-{ id: “supervisor”, label: “Työnjohtaja / Esimies” }
-],
-sectors: [
-{ id: “rakennusala”, name: “Rakennusala”, emoji: “🏗️”, roles: [“Maanrakennustyöntekijä”,“Kaivinkoneenkuljettaja”,“Pyöräkuormaajankuljettaja”,“Tiehöylänkuljettaja”,“Räjäyttäjä / Louhintatyöntekijä”,“Betonityöntekijä”,“Raudoittaja”,“Elementtiasentaja”,“Teräsrakentaja / Teräsmontaattori”,“Kirvesmies”,“Muurari”,“Telineasentaja”,“Sähköasentaja”,“LVI-asentaja”,“Automaatioasentaja”,“Sprinkleri-asentaja”,“Kaukolämpöasentaja”,“Rappari”,“Maalari”,“Lattiamies”,“Vedeneristäjä”,“Kattomies / Pellittäjä”,“Purkutyöntekijä”,“Rakennusapumies”,“Rakennussiivooja”,“Vastaava mestari”,“Työnjohtaja (rakennusala)”,“Rakennusinsinööri”,“Työturvallisuuspäällikkö (HSEQ)”] },
-{ id: “teollisuus”, name: “Teollisuus & Tuotanto”, emoji: “🏭”, roles: [“Hitsaaja (MIG/MAG)”,“Hitsaaja (TIG)”,“Hitsaaja (puikko)”,“Levyseppä-hitsaaja”,“CNC-operaattori / Koneistaja”,“Särmääjä”,“Putkistomontaattori”,“Kokoonpanija”,“Tuotantotyöntekijä”,“Pakkaustyöntekijä”,“Operaattori (prosessiteollisuus)”,“Elintarviketyöntekijä”,“Puutyöntekijä / Sahatyöntekijä”,“Kunnossapitoasentaja”,“Mekaaninen kunnossapitäjä”,“Sähkökunnossapitäjä”,“Laaduntarkastaja”,“Varastotyöntekijä (teollisuus)”,“Tuotantopäällikkö”,“Vuoromestari / Tuotannonjohtaja”,“Lean / Prosessikehittäjä”,“Teollisuusinsinööri”] },
-{ id: “laivanrakennus”, name: “Laivanrakennus & Offshore”, emoji: “⚓”, roles: [“Laivanrakentaja / Rungonrakentaja”,“Laivalevyseppä-hitsaaja”,“Laivaputkistomontaattori”,“Laivahitsaaja”,“Teräsrakentaja (laivateollisuus)”,“Laivakoneistaja”,“Laivasähköasentaja”,“Laiva-automaatioasentaja”,“Putkistohitsaaja (offshore)”,“Eristäjä (laiva)”,“Pintakäsittelijä (laiva)”,“Laivan varusteluasentaja”,“Nosturinkuljettaja (telakka)”,“Telakoitsija / Hinaajankuljettaja”,“Laivarakennusinsinööri”,“Telakkatyönjohtaja”,“Projekti-insinööri (laiva)”] },
-{ id: “metalliteollisuus”, name: “Metalliteollisuus”, emoji: “⚙️”, roles: [“Valutyöntekijä”,“Taontaoperaattori”,“Pinnoittaja / Galvanoija”,“Hiontatyöntekijä”,“Lämpökäsittelijä”,“Alumiinirakentaja”,“Työkaluntekijä / Muotintekijä”,“Mittausteknikko (CMM)”,“Painelaiteasentaja”,“NDT-tarkastaja”,“Hitsausinsinööri / -koordinaattori”,“Metallurgisti”,“Tuotantoinsinööri (metalli)”,“Ostaja / Hankkija (metalli)”] },
-{ id: “horeca”, name: “HoReCa”, emoji: “🍽️”, roles: [“Keittiöpäällikkö / Head Chef”,“Vuoropäällikkö (keittiö)”,“Kokki”,“Commis Chef / Apukokki”,“Pastry Chef / Kondiittori”,“Kylmäkkö”,“Keittiöapulainen / Astianpesijä”,“Catering-työntekijä”,“Ravintolapäällikkö”,“Vuoropäällikkö (sali)”,“Tarjoilija”,“Baarimestari / Bariista”,“Hovimestari”,“Hotellinjohtaja”,“Vastaanottovirkailija”,“Concierge”,“Siivouspalveluvastaava (hotelli)”,“Huoneenhoitaja / Room Attendant”,“Kylpylä- / Spa-työntekijä”,“Tapahtumapäällikkö”,“Cateringkoordinaattori”] },
-{ id: “logistiikka”, name: “Kuljetus, Logistiikka & Varasto”, emoji: “🚚”, roles: [“Kuorma-autonkuljettaja (CE)”,“Kuorma-autonkuljettaja (C)”,“Säiliöautonkuljettaja”,“Erikoiskuljetuksen kuljettaja”,“Jakelukuljettaja (B/BE)”,“Linja-autonkuljettaja (D)”,“Varastonhoitaja”,“Varastotyöntekijä / Keräilijä”,“Trukinkuljettaja (VNA/reach)”,“Terminaalityöntekijä”,“Satamatyöntekijä”,“Huolitsija”,“Kuljetussuunnittelija”,“Logistiikkakoordinaattori”,“Varastopäällikkö”,“Kuljetuspäällikkö”,“Hankintakoordinaattori (logistiikka)”,“Tullaaja / Tulli-ilmoittaja”] }
-]
-};
-
-function initAdminDropdowns() {
-const sectorSel = document.getElementById(‘jobSector’);
-const levelSel = document.getElementById(‘jobLevel’);
-if (!sectorSel) return;
-sectorSel.innerHTML = ‘<option value="">Valitse sektori…</option>’ +
-JOB_DATA.sectors.map(function(s){ return ‘<option value="' + s.id + '">’ + s.emoji + ’ ’ + s.name + ‘</option>’; }).join(’’);
-levelSel.innerHTML = ‘<option value="">Kaikki tasot</option>’ +
-JOB_DATA.experience_levels.map(function(l){ return ‘<option value="' + l.id + '">’ + l.label + ‘</option>’; }).join(’’);
-}
-
-function updateRoleDropdown() {
-const sectorId = document.getElementById(‘jobSector’).value;
-const roleSel = document.getElementById(‘jobTitle’);
-const sector = JOB_DATA.sectors.find(function(s) { return s.id === sectorId; });
-if (!sector) {
-roleSel.innerHTML = ‘<option value="">Valitse ensin sektori…</option>’;
-return;
-}
-roleSel.innerHTML = ‘<option value="">Valitse tehtävänimike…</option>’ +
-sector.roles.map(function(r) { return ‘<option value="' + r + '">’ + r + ‘</option>’; }).join(’’);
-}
-
 // ── ADMIN ──────────────────────────────────────────────────────
 const ADMIN_PW = ‘foundry2025’;
 // Safe storage - works even if localStorage is blocked (iOS private mode)
@@ -1413,14 +1262,7 @@ loadJobs();
 function openAdmin() {
 document.getElementById(‘adminOverlay’).classList.remove(‘hidden’);
 document.getElementById(‘adminPwInput’).focus();
-}
-
-function showAdminPanel() {
-document.getElementById(‘adminLogin’).classList.add(‘hidden’);
-document.getElementById(‘adminPanel’).classList.remove(‘hidden’);
-initAdminDropdowns();
 renderAdminJobList();
-updateJobCount();
 }
 
 function closeAdmin() {
@@ -1434,17 +1276,20 @@ resetForm();
 function checkAdminPw() {
 const pw = document.getElementById(‘adminPwInput’).value;
 if (pw === ADMIN_PW) {
-showAdminPanel();
+document.getElementById(‘adminLogin’).classList.add(‘hidden’);
+document.getElementById(‘adminPanel’).classList.remove(‘hidden’);
+renderAdminJobList();
+updateJobCount();
 } else {
 const err = document.getElementById(‘adminError’);
 err.style.display = ‘block’;
-setTimeout(function(){ err.style.display = ‘none’; }, 2500);
+setTimeout(() => err.style.display = ‘none’, 2500);
 }
 }
 
 function resetForm() {
-[‘jobTitle’,‘jobLocation’,‘jobIndustry’,‘jobDesc’].forEach(function(id){
-var el = document.getElementById(id);
+[‘jobTitle’,‘jobLocation’,‘jobIndustry’,‘jobDesc’].forEach(id => {
+const el = document.getElementById(id);
 if (el) el.value = ‘’;
 });
 document.getElementById(‘jobType’).selectedIndex = 0;
@@ -1482,7 +1327,7 @@ renderPage(currentPage);
 
 function deleteJob(id) {
 if (!confirm(‘Poistetaanko ilmoitus?’)) return;
-jobs = jobs.filter(function(j){ return j.id !== id; });
+jobs = jobs.filter(j => j.id !== id);
 saveJobs();
 renderAdminJobList();
 updateJobCount();
@@ -1501,15 +1346,7 @@ if (jobs.length === 0) {
 list.innerHTML = ‘<p style="color:var(--text-muted);font-size:0.9rem;">Ei ilmoituksia vielä.</p>’;
 return;
 }
-list.innerHTML = jobs.map(function(j){
-return ‘<div class="admin-job-item">’ +
-‘<div>’ +
-‘<h4>’ + j.title + ‘</h4>’ +
-‘<p>’ + (j.sector || ‘’) + ’ · 📍 ’ + j.location + ’ · ’ + j.type + (j.level ? ’ · ’ + j.level : ‘’) + ’ · Lisätty ’ + j.date + ‘</p>’ +
-‘</div>’ +
-‘<button class="btn-delete" onclick="deleteJob(' + j.id + ')">Poista</button>’ +
-‘</div>’;
-}).join(’’);
+list.innerHTML = jobs.map(j => `<div class="admin-job-item"> <div> <h4>${j.title}</h4> <p>${j.sector || ''} · 📍 ${j.location} · ${j.type}${j.level ? ' · ' + j.level : ''} · Lisätty ${j.date}</p> </div> <button class="btn-delete" onclick="deleteJob(${j.id})">Poista</button> </div>`).join(’’);
 }
 // ──────────────────────────────────────────────────────────────
 
@@ -1541,26 +1378,12 @@ console.error(‘Init error:’, e);
     <div class="admin-form">
       <div class="admin-grid">
         <div class="form-group">
-          <label>Sektori *</label>
-          <select id="jobSector" onchange="updateRoleDropdown()">
-            <option value="">Valitse sektori...</option>
-          </select>
-        </div>
-        <div class="form-group">
           <label>Tehtävänimike *</label>
-          <select id="jobTitle">
-            <option value="">Valitse ensin sektori...</option>
-          </select>
+          <input type="text" id="jobTitle" placeholder="esim. Rakennusmies, Chef, Varastotyöntekijä">
         </div>
         <div class="form-group">
           <label>Sijainti *</label>
           <input type="text" id="jobLocation" placeholder="esim. Helsinki, Tallinna, Berlin">
-        </div>
-        <div class="form-group">
-          <label>Kokemusaste</label>
-          <select id="jobLevel">
-            <option value="">Kaikki tasot</option>
-          </select>
         </div>
         <div class="form-group">
           <label>Työaika *</label>
@@ -1572,9 +1395,13 @@ console.error(‘Init error:’, e);
           </select>
         </div>
         <div class="form-group">
-          <label>Hakuaika</label>
-          <input type="text" id="jobDeadline" placeholder="esim. 31.12.2025 tai Avoin">
+          <label>Toimiala</label>
+          <input type="text" id="jobIndustry" placeholder="esim. Rakentaminen, HoReCa, Teollisuus">
         </div>
+      </div>
+      <div class="form-group">
+        <label>Lisätiedot Claudelle (vapaaehtoinen)</label>
+        <textarea id="jobNotes" placeholder="esim. Vaatii ajokortin, kokemus tarpeen, kansainvälinen tiimi, fyysinen työ..."></textarea>
       </div>
       <div class="form-group">
         <label>Ilmoituksen kuvaus *</label>
