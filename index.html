@@ -1,1 +1,1596 @@
+<!DOCTYPE html>
 
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundryworks – International Staffing & Recruitment</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0F2E50;
+    --navy-light: #1B4070;
+    --orange: #FF6600;
+    --orange-hover: #e55a00;
+    --bg: #F5F5F3;
+    --white: #ffffff;
+    --text: #1a1a1a;
+    --text-muted: #5a6275;
+    --border: #e0e0e0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 17px; line-height: 1.7; }
+
+/* NAV */
+nav {
+position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+background: var(–navy); padding: 0 4%;
+display: flex; align-items: center; justify-content: space-between;
+height: 68px; box-shadow: 0 2px 24px rgba(0,0,0,0.18);
+}
+.logo { font-family: ‘Fraunces’, serif; font-weight: 900; font-size: 1.5rem; color: var(–white); letter-spacing: -0.5px; text-decoration: none; cursor: pointer; }
+.logo span { color: var(–orange); }
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+.nav-links { display: flex; gap: 1.4rem; list-style: none; align-items: center; }
+.nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.3px; transition: color 0.2s; cursor: pointer; }
+.nav-links a:hover { color: var(–white); }
+.nav-links .cta-nav { background: var(–orange); color: var(–white); padding: 0.45rem 1.1rem; border-radius: 4px; font-weight: 600; transition: background 0.2s; }
+.nav-links .cta-nav:hover { background: var(–orange-hover); }
+
+/* LANGUAGE SELECTOR */
+.lang-selector { position: relative; }
+.lang-btn {
+background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25);
+color: var(–white); padding: 0.35rem 0.8rem; border-radius: 4px;
+font-size: 0.82rem; font-weight: 600; cursor: pointer; font-family: ‘DM Sans’, sans-serif;
+display: flex; align-items: center; gap: 0.4rem; transition: background 0.2s;
+}
+.lang-btn:hover { background: rgba(255,255,255,0.18); }
+.lang-dropdown {
+display: none; position: absolute; top: calc(100% + 8px); right: 0;
+background: var(–white); border-radius: 6px; box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+overflow: hidden; min-width: 160px; z-index: 200;
+}
+.lang-dropdown.open { display: block; }
+.lang-option {
+padding: 0.65rem 1rem; font-size: 0.88rem; cursor: pointer;
+display: flex; align-items: center; gap: 0.6rem; color: var(–text);
+transition: background 0.15s; font-weight: 500;
+}
+.lang-option:hover { background: var(–bg); }
+.lang-option.active { background: #eef3f9; color: var(–navy); font-weight: 700; }
+
+/* PAGES */
+.page { display: none; padding-top: 68px; }
+.page.active { display: block; }
+
+/* HERO */
+.hero {
+background: var(–navy); min-height: 92vh;
+display: flex; align-items: center; padding: 6rem 5% 5rem;
+position: relative; overflow: hidden;
+}
+.hero::before {
+content: ‘’; position: absolute; top: -120px; right: -120px;
+width: 560px; height: 560px; border-radius: 50%;
+background: radial-gradient(circle, rgba(255,102,0,0.12) 0%, transparent 70%);
+}
+.hero::after {
+content: ‘’; position: absolute; bottom: -80px; left: 10%;
+width: 380px; height: 380px; border-radius: 50%;
+background: radial-gradient(circle, rgba(27,64,112,0.6) 0%, transparent 70%);
+}
+.hero-content { max-width: 780px; position: relative; z-index: 2; animation: fadeUp 0.9s ease both; }
+.hero-eyebrow { display: inline-block; font-size: 0.8rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(–orange); margin-bottom: 1.5rem; }
+.hero h1 { font-family: ‘Fraunces’, serif; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; color: var(–white); line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -1px; }
+.hero h1 em { font-style: italic; color: var(–orange); }
+.hero p { font-size: 1.15rem; color: rgba(255,255,255,0.72); max-width: 560px; margin-bottom: 2.5rem; font-weight: 300; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn-primary { background: var(–orange); color: var(–white); padding: 0.85rem 2rem; border-radius: 4px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.2s, transform 0.15s; display: inline-block; cursor: pointer; }
+.btn-primary:hover { background: var(–orange-hover); transform: translateY(-2px); }
+.btn-secondary { background: transparent; color: var(–white); padding: 0.85rem 2rem; border-radius: 4px; font-weight: 500; font-size: 0.95rem; text-decoration: none; border: 1.5px solid rgba(255,255,255,0.35); transition: border-color 0.2s, transform 0.15s; display: inline-block; cursor: pointer; }
+.btn-secondary:hover { border-color: var(–white); transform: translateY(-2px); }
+
+/* STATS */
+.stats { background: var(–white); padding: 3.5rem 5%; display: flex; justify-content: center; gap: 5rem; flex-wrap: wrap; border-bottom: 1px solid var(–border); }
+.stat { text-align: center; }
+.stat-number { font-family: ‘Fraunces’, serif; font-size: 2.6rem; font-weight: 900; color: var(–navy); line-height: 1; }
+.stat-number span { color: var(–orange); }
+.stat-label { font-size: 0.85rem; color: var(–text-muted); font-weight: 500; letter-spacing: 0.5px; margin-top: 0.35rem; text-transform: uppercase; }
+
+/* SECTION */
+.section { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; }
+.section-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(–orange); margin-bottom: 0.8rem; }
+.section h2 { font-family: ‘Fraunces’, serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(–navy); line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.5px; }
+.section-intro { color: var(–text-muted); max-width: 560px; font-size: 1.05rem; margin-bottom: 3.5rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+.card { background: var(–white); border-radius: 8px; padding: 2.5rem; border: 1px solid var(–border); transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(15,46,80,0.1); }
+.card-icon { font-size: 2rem; margin-bottom: 1.2rem; }
+.card h3 { font-family: ‘Fraunces’, serif; font-size: 1.3rem; font-weight: 700; color: var(–navy); margin-bottom: 0.8rem; }
+.card p { color: var(–text-muted); font-size: 0.95rem; line-height: 1.65; }
+.card-link { display: inline-block; margin-top: 1.2rem; color: var(–orange); font-weight: 600; font-size: 0.9rem; text-decoration: none; cursor: pointer; }
+.card-link:hover { text-decoration: underline; }
+
+/* PAGE HERO */
+.page-hero { background: var(–navy); padding: 5rem 5% 4rem; position: relative; overflow: hidden; }
+.page-hero::before { content: ‘’; position: absolute; top: -80px; right: -80px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(255,102,0,0.1) 0%, transparent 70%); }
+.page-hero-content { position: relative; z-index: 2; max-width: 700px; }
+.page-hero .eyebrow { font-size: 0.78rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(–orange); margin-bottom: 1rem; display: block; }
+.page-hero h1 { font-family: ‘Fraunces’, serif; font-size: clamp(2.2rem, 4.5vw, 3.5rem); font-weight: 900; color: var(–white); line-height: 1.1; margin-bottom: 1.2rem; letter-spacing: -0.5px; }
+.page-hero p { color: rgba(255,255,255,0.72); font-size: 1.1rem; font-weight: 300; max-width: 520px; }
+
+.content-section { padding: 5rem 5%; max-width: 1100px; margin: 0 auto; }
+.content-block { margin-bottom: 4rem; }
+.content-block h2 { font-family: ‘Fraunces’, serif; font-size: 1.8rem; font-weight: 700; color: var(–navy); margin-bottom: 1rem; }
+.content-block p { color: var(–text-muted); font-size: 1rem; max-width: 680px; margin-bottom: 1rem; }
+.feature-list { list-style: none; margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.feature-list li { background: var(–white); border: 1px solid var(–border); border-left: 3px solid var(–orange); padding: 1rem 1.2rem; border-radius: 4px; font-size: 0.95rem; color: var(–text); font-weight: 500; }
+
+.cta-band { background: var(–navy); padding: 5rem 5%; text-align: center; }
+.cta-band h2 { font-family: ‘Fraunces’, serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; color: var(–white); margin-bottom: 1rem; letter-spacing: -0.3px; }
+.cta-band p { color: rgba(255,255,255,0.65); margin-bottom: 2rem; font-size: 1.05rem; }
+
+/* CONTACT */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.contact-info h2 { font-family: ‘Fraunces’, serif; font-size: 2rem; font-weight: 800; color: var(–navy); margin-bottom: 1rem; }
+.contact-info p { color: var(–text-muted); margin-bottom: 2rem; }
+.contact-item { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; font-size: 0.97rem; }
+.contact-item a { color: var(–navy); text-decoration: none; font-weight: 500; }
+.contact-item a:hover { color: var(–orange); }
+.contact-form { background: var(–white); border: 1px solid var(–border); border-radius: 8px; padding: 2.5rem; }
+.contact-form h3 { font-family: ‘Fraunces’, serif; font-size: 1.4rem; font-weight: 700; color: var(–navy); margin-bottom: 1.5rem; }
+.form-group { margin-bottom: 1.2rem; }
+.form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(–text); margin-bottom: 0.4rem; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(–border); border-radius: 4px; font-family: ‘DM Sans’, sans-serif; font-size: 0.95rem; color: var(–text); background: var(–bg); transition: border-color 0.2s; outline: none; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(–navy); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.btn-submit { background: var(–orange); color: var(–white); padding: 0.85rem 2rem; border-radius: 4px; font-weight: 600; font-size: 0.95rem; border: none; cursor: pointer; font-family: ‘DM Sans’, sans-serif; transition: background 0.2s; width: 100%; margin-top: 0.5rem; }
+.btn-submit:hover { background: var(–orange-hover); }
+
+.no-jobs { text-align: center; padding: 4rem 2rem; color: var(–text-muted); }
+.no-jobs h3 { font-family: ‘Fraunces’, serif; font-size: 1.5rem; color: var(–navy); margin-bottom: 0.8rem; }
+
+footer { background: #0a1f38; color: rgba(255,255,255,0.55); padding: 3rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; font-size: 0.88rem; }
+.footer-logo { font-family: ‘Fraunces’, serif; font-weight: 900; font-size: 1.2rem; color: var(–white); }
+.footer-logo span { color: var(–orange); }
+footer a { color: rgba(255,255,255,0.55); text-decoration: none; }
+footer a:hover { color: var(–white); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+/* RTL support for Arabic */
+body.rtl { direction: rtl; }
+body.rtl .feature-list li { border-left: none; border-right: 3px solid var(–orange); }
+
+@media (max-width: 900px) {
+.nav-links { gap: 1rem; }
+.nav-links li.hide-mobile { display: none; }
+.stats { gap: 2.5rem; }
+.contact-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+.nav-links { display: none; }
+.nav-right { gap: 1rem; }
+}
+
+/* ADMIN */
+.admin-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 999; display: flex; align-items: center; justify-content: center; }
+.admin-overlay.hidden { display: none; }
+.admin-login { background: var(–white); border-radius: 10px; padding: 2.5rem; width: 360px; text-align: center; }
+.admin-login h2 { font-family: ‘Fraunces’, serif; font-size: 1.6rem; color: var(–navy); margin-bottom: 0.5rem; }
+.admin-login p { color: var(–text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+.admin-login input { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(–border); border-radius: 4px; font-family: ‘DM Sans’, sans-serif; font-size: 0.95rem; margin-bottom: 1rem; outline: none; }
+.admin-login input:focus { border-color: var(–navy); }
+.admin-error { color: #e53e3e; font-size: 0.85rem; margin-bottom: 0.8rem; display: none; }
+.admin-panel { background: var(–white); border-radius: 10px; padding: 2rem; width: min(95vw, 860px); max-height: 90vh; overflow-y: auto; }
+.admin-panel-header { font-family: ‘Fraunces’, serif; font-size: 1.5rem; color: var(–navy); margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+.admin-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(–text-muted); }
+.admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.admin-form .form-group { margin-bottom: 1rem; }
+.admin-form label { display: block; font-size: 0.78rem; font-weight: 700; color: var(–text); margin-bottom: 0.35rem; letter-spacing: 0.5px; text-transform: uppercase; }
+.admin-form input, .admin-form select, .admin-form textarea { width: 100%; padding: 0.65rem 0.9rem; border: 1.5px solid var(–border); border-radius: 4px; font-family: ‘DM Sans’, sans-serif; font-size: 0.93rem; outline: none; background: var(–bg); color: var(–text); }
+.admin-form input:focus, .admin-form select:focus, .admin-form textarea:focus { border-color: var(–navy); }
+.admin-form textarea { min-height: 80px; resize: vertical; }
+.admin-actions { display: flex; gap: 0.8rem; margin-top: 1.2rem; flex-wrap: wrap; }
+.btn-generate { background: var(–navy); color: var(–white); padding: 0.7rem 1.5rem; border-radius: 4px; border: none; font-family: ‘DM Sans’, sans-serif; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: background 0.2s; }
+.btn-generate:hover { background: #1B4070; }
+.btn-generate:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-save-job { background: var(–orange); color: var(–white); padding: 0.7rem 1.5rem; border-radius: 4px; border: none; font-family: ‘DM Sans’, sans-serif; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: background 0.2s; display: none; }
+.btn-save-job:hover { background: var(–orange-hover); }
+.generated-preview { background: #f0f4f9; border: 1.5px solid #c8d8ea; border-radius: 6px; padding: 1.2rem; margin-top: 1rem; font-size: 0.93rem; line-height: 1.65; color: var(–text); white-space: pre-wrap; display: none; }
+.spinner { text-align: center; padding: 1.5rem; color: var(–text-muted); font-size: 0.9rem; display: none; }
+.admin-job-list { margin-top: 2rem; border-top: 1px solid var(–border); padding-top: 1.5rem; }
+.admin-job-list h3 { font-family: ‘Fraunces’, serif; font-size: 1.1rem; color: var(–navy); margin-bottom: 1rem; }
+.admin-job-item { background: var(–bg); border: 1px solid var(–border); border-radius: 6px; padding: 1rem 1.2rem; margin-bottom: 0.7rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.admin-job-item h4 { font-size: 0.95rem; font-weight: 700; color: var(–navy); }
+.admin-job-item p { font-size: 0.82rem; color: var(–text-muted); margin-top: 0.2rem; }
+.btn-delete { background: none; border: 1px solid #e53e3e; color: #e53e3e; padding: 0.3rem 0.7rem; border-radius: 4px; font-size: 0.8rem; cursor: pointer; font-family: ‘DM Sans’, sans-serif; white-space: nowrap; transition: background 0.15s; }
+.btn-delete:hover { background: #fff5f5; }
+.admin-trigger { position: fixed; bottom: 1.5rem; right: 1.5rem; background: var(–navy); color: rgba(255,255,255,0.3); border: none; border-radius: 50%; width: 42px; height: 42px; font-size: 1rem; cursor: pointer; z-index: 500; transition: color 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+.admin-trigger:hover { color: var(–white); }
+.badge-count { background: var(–orange); color: white; border-radius: 10px; padding: 0.15rem 0.5rem; font-size: 0.75rem; font-weight: 700; margin-left: 0.5rem; }
+
+/* SEARCH */
+.search-bar { background: var(–white); border: 1px solid var(–border); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem; display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 1rem; align-items: end; }
+.search-bar .form-group { margin: 0; }
+.search-bar label { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(–text-muted); margin-bottom: 0.4rem; }
+.search-bar select, .search-bar input { width: 100%; padding: 0.6rem 0.9rem; border: 1.5px solid var(–border); border-radius: 4px; font-family: ‘DM Sans’, sans-serif; font-size: 0.92rem; color: var(–text); background: var(–bg); outline: none; }
+.search-bar select:focus, .search-bar input:focus { border-color: var(–navy); }
+.btn-search { background: var(–navy); color: var(–white); padding: 0.65rem 1.5rem; border-radius: 4px; border: none; font-family: ‘DM Sans’, sans-serif; font-weight: 600; cursor: pointer; white-space: nowrap; font-size: 0.92rem; transition: background 0.2s; height: fit-content; }
+.btn-search:hover { background: #1B4070; }
+.btn-clear { background: none; border: none; color: var(–text-muted); font-size: 0.82rem; cursor: pointer; font-family: ‘DM Sans’, sans-serif; padding: 0.4rem 0; text-decoration: underline; display: block; margin-top: 0.5rem; }
+.results-count { font-size: 0.85rem; color: var(–text-muted); margin-bottom: 1.5rem; font-weight: 500; }
+.job-card-pub { background: var(–white); border: 1px solid var(–border); border-left: 3px solid var(–orange); border-radius: 8px; padding: 1.8rem 2rem; margin-bottom: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
+.job-card-pub:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(15,46,80,0.09); }
+.job-card-pub-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.8rem; }
+.job-card-pub h3 { font-family: ‘Fraunces’, serif; font-size: 1.15rem; font-weight: 700; color: var(–navy); margin: 0; }
+.job-type-badge { background: #fff3e6; color: var(–orange); font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 20px; white-space: nowrap; }
+.job-meta-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
+.job-meta-tag { font-size: 0.82rem; color: var(–text-muted); display: flex; align-items: center; gap: 0.3rem; }
+.level-badge { font-size: 0.75rem; background: #eef3f9; color: var(–navy); padding: 0.2rem 0.6rem; border-radius: 12px; font-weight: 600; }
+.sector-badge { font-size: 0.75rem; background: #f0f4f9; color: var(–navy-light); padding: 0.2rem 0.6rem; border-radius: 12px; font-weight: 500; }
+.job-desc { color: var(–text-muted); font-size: 0.93rem; line-height: 1.65; margin-bottom: 1.2rem; }
+@media (max-width: 700px) { .search-bar { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" onclick="showPage('home')">Foundry<span>works</span></div>
+  <div class="nav-right">
+    <ul class="nav-links" id="navLinks"></ul>
+    <div class="lang-selector">
+      <button class="lang-btn" onclick="toggleLangMenu()" id="langBtn">🌐 EN ▾</button>
+      <div class="lang-dropdown" id="langDropdown"></div>
+    </div>
+  </div>
+</nav>
+
+<div id="app"></div>
+
+<script>
+const languages = {
+  en: { label: 'English', flag: '🇬🇧', dir: 'ltr' },
+  fi: { label: 'Suomi', flag: '🇫🇮', dir: 'ltr' },
+  et: { label: 'Eesti', flag: '🇪🇪', dir: 'ltr' },
+  ru: { label: 'Русский', flag: '🇷🇺', dir: 'ltr' },
+  de: { label: 'Deutsch', flag: '🇩🇪', dir: 'ltr' },
+  es: { label: 'Español', flag: '🇪🇸', dir: 'ltr' },
+  sv: { label: 'Svenska', flag: '🇸🇪', dir: 'ltr' },
+  pl: { label: 'Polski', flag: '🇵🇱', dir: 'ltr' },
+  fr: { label: 'Français', flag: '🇫🇷', dir: 'ltr' },
+};
+
+const t = {
+  en: {
+    nav: { jobs: 'Open Positions', clients: 'For Clients', seekers: 'For Job Seekers', about: 'About Us', contact: 'Contact' },
+    home: {
+      eyebrow: 'International Staffing & Recruitment',
+      h1a: 'The right people,', h1b: 'when you need them.',
+      sub: 'Foundryworks connects businesses with skilled professionals and helps people find work that fits — quickly, without unnecessary complexity.',
+      btn1: 'View Open Positions', btn2: 'Get in Touch',
+      stat1: 'Placements Made', stat2: 'Client Companies', stat3: 'Countries', stat4: 'Years Experience',
+      whatLabel: 'What We Do', whatH2: 'Staffing that works\nfor both sides.',
+      whatSub: 'Whether you\'re a business looking to grow your team or a professional ready for your next move, we\'re here to make it happen.',
+      card1h: 'For Clients', card1p: 'We handle recruitment from start to finish — finding the right people for your business, fast. Flexible solutions for any staffing need.', card1a: 'Learn more →',
+      card2h: 'For Job Seekers', card2p: 'No lengthy processes, no unnecessary steps. We move fast and work with you as an individual to find opportunities that suit your skills.', card2a: 'Learn more →',
+      card3h: 'International Reach', card3p: 'Operating across borders with a personal touch. We bring global reach without losing the human element that makes placements last.', card3a: 'About us →',
+      ctaH: 'Ready to find your next hire?', ctaP: 'Let\'s talk about what you need. We\'ll take it from there.', ctaBtn: 'Contact Us',
+      footer: 'International Staffing & Recruitment',
+    },
+    clients: {
+      eyebrow: 'For Clients', h1: 'The right fit,\nevery time.',
+      sub: 'Finding reliable workers shouldn\'t slow you down. We connect businesses with skilled, motivated professionals — quickly and without unnecessary complexity.',
+      h2a: 'How we work',
+      p1: 'We take the time to understand your business, your culture, and what you actually need from a new hire. This means better matches, smoother onboarding, and people who genuinely fit your team.',
+      p2: 'From the first conversation to the final placement, we handle the process so you don\'t have to.',
+      h2b: 'Why Foundryworks',
+      f1: 'Flexible solutions for any staffing need, short or long-term',
+      f2: 'Thorough candidate screening — you only meet the right people',
+      f3: 'Fast, responsive service without cutting corners',
+      f4: 'A dedicated partner throughout the entire process',
+      f5: 'International reach with a personal touch',
+      f6: 'Experience across a wide range of industries',
+      ctaH: 'Ready to find your next hire?', ctaP: 'Get in touch and let\'s talk about what you need.', ctaBtn: 'Contact Us →',
+    },
+    seekers: {
+      eyebrow: 'For Job Seekers', h1: 'Your next opportunity\nstarts here.',
+      sub: 'Looking for work shouldn\'t be complicated. We cut through the bureaucracy and focus on what matters — getting you to work quickly.',
+      h2a: 'What to expect',
+      p1: 'We work with you as an individual, not just a CV. From your first contact with us, we move fast. No lengthy processes, no unnecessary steps — just a straightforward path to your next job.',
+      h2b: 'What we offer',
+      f1: 'Fast response and a clear process from day one',
+      f2: 'Personal support throughout your job search',
+      f3: 'Opportunities across a wide range of industries and roles',
+      f4: 'International placements available',
+      f5: 'A team that\'s genuinely on your side',
+      f6: 'No unnecessary paperwork or delays',
+      ctaH: 'Take the first step.', ctaP: 'Send us your details or browse our open positions — we\'ll be in touch soon.',
+      btn1: 'Open Positions →', btn2: 'Contact Us',
+    },
+    about: {
+      eyebrow: 'About Us', h1: 'Staffing done\ndifferently.',
+      sub: 'Built on a simple belief — that finding the right people should be straightforward, personal, and fast.',
+      h2a: 'Who we are',
+      p1: 'Foundryworks is a staffing and recruitment company operating internationally, connecting businesses with the talent they need and helping people find work that fits their skills and ambitions.',
+      p2: 'We don\'t believe in unnecessary complexity. Our approach is direct, our process is efficient, and our focus is always on the people — whether that\'s a company looking to grow its team or an individual taking their next career step.',
+      h2b: 'What drives us',
+      p3: 'The staffing industry can be impersonal. We think it shouldn\'t be. Every business has its own culture, and every person has their own story. We take the time to understand both — and that\'s what makes the difference.',
+      h2c: 'Built on experience. Focused on results.',
+      p4: 'Our team brings years of hands-on experience in recruitment across industries and markets. We use that knowledge to deliver results that last.',
+      f1: 'International operations across multiple markets',
+      f2: 'Deep experience in staffing and recruitment',
+      f3: 'Personal, direct approach to every placement',
+      f4: 'Long-term partnerships with clients and candidates',
+      ctaH: 'Let\'s work together.', ctaP: 'Whether you\'re a business or a job seeker, we\'d love to hear from you.', ctaBtn: 'Get in Touch →',
+    },
+    jobs: {
+      eyebrow: 'Open Positions', h1: 'Find your next\nopportunity.',
+      sub: 'Browse our current openings across a wide range of industries and locations.',
+      noH: 'New positions coming soon.',
+      noP: 'We\'re currently updating our listings. Send us your details and we\'ll reach out when the right opportunity comes up.',
+      noBtn: 'Send Your CV →',
+    },
+    contact: {
+      eyebrow: 'Contact', h1: 'Let\'s talk.',
+      sub: 'Whether you\'re looking to hire or looking for work, get in touch and we\'ll take it from there.',
+      h2: 'Get in touch',
+      p: 'We respond quickly. No unnecessary back-and-forth — just a direct conversation about what you need.',
+      intl: 'Operating internationally',
+      formH: 'Send a message',
+      nameL: 'Your name', nameP: 'Jane Smith',
+      emailL: 'Email address', emailP: 'jane@company.com',
+      roleL: 'I am a...', role1: 'Business looking to hire', role2: 'Job seeker', role3: 'Other',
+      msgL: 'Message', msgP: 'Tell us what you\'re looking for...',
+      send: 'Send Message →',
+    },
+  },
+  fi: {
+    nav: { jobs: 'Avoimet työpaikat', clients: 'Yrityksille', seekers: 'Työnhakijoille', about: 'Meistä', contact: 'Yhteystiedot' },
+    home: {
+      eyebrow: 'Kansainvälinen henkilöstöpalvelu',
+      h1a: 'Oikea henkilö,', h1b: 'oikeaan aikaan.',
+      sub: 'Foundryworks yhdistää yritykset osaaviin ammattilaisiin ja auttaa työnhakijoita löytämään sopivan paikan – nopeasti ja ilman turhaa byrokratiaa.',
+      btn1: 'Katso avoimet paikat', btn2: 'Ota yhteyttä',
+      stat1: 'Sijoitusta tehty', stat2: 'Asiakasyritystä', stat3: 'Maata', stat4: 'Vuoden kokemus',
+      whatLabel: 'Mitä teemme', whatH2: 'Henkilöstöpalvelu,\njoka toimii molemmille.',
+      whatSub: 'Olitpa kasvua hakeva yritys tai urallaan eteenpäin tähtäävä ammattilainen – me hoidamme homman.',
+      card1h: 'Yrityksille', card1p: 'Hoidamme rekrytoinnin alusta loppuun – löydämme oikeat ihmiset yrityksellesi nopeasti. Joustavia ratkaisuja kaikkiin henkilöstötarpeisiin.', card1a: 'Lue lisää →',
+      card2h: 'Työnhakijoille', card2p: 'Ei pitkiä prosesseja eikä turhia välivaiheita. Toimimme nopeasti ja etsimme juuri sinulle sopivia mahdollisuuksia.', card2a: 'Lue lisää →',
+      card3h: 'Kansainvälinen toiminta', card3p: 'Toimimme rajojen yli pitäen silti henkilökohtaisen otteen. Globaali ulottuvuus, inhimillinen ote.', card3a: 'Meistä →',
+      ctaH: 'Etsitkö seuraavaa tekijää?', ctaP: 'Ota yhteyttä – kerro tarpeesi ja me huolehdimme lopusta.', ctaBtn: 'Ota yhteyttä',
+      footer: 'Kansainvälinen henkilöstöpalvelu',
+    },
+    clients: {
+      eyebrow: 'Yrityksille', h1: 'Täsmäosuma\njoka kerta.',
+      sub: 'Luotettavien työntekijöiden löytämisen ei tarvitse hidastaa liiketoimintaasi. Yhdistämme yritykset osaaviin ammattilaisiin – nopeasti ja suoraviivaisesti.',
+      h2a: 'Näin työskentelemme',
+      p1: 'Perehdymme yrityksesi toimintaan, kulttuuriin ja todellisiin tarpeisiin ennen kuin etsimme sopivaa henkilöä. Tulos: parempi yhteensopivuus, sujuvampi perehdytys ja ihmiset, jotka aidosti sopivat tiimiisi.',
+      p2: 'Hoidamme koko prosessin ensimmäisestä keskustelusta aina sijoitukseen asti – niin että sinun ei tarvitse.',
+      h2b: 'Miksi Foundryworks',
+      f1: 'Joustavat ratkaisut lyhyt- ja pitkäaikaisiin henkilöstötarpeisiin',
+      f2: 'Huolellinen hakijakartoitus – tapaat vain sopivat ehdokkaat',
+      f3: 'Nopea ja reagoiva palvelu ilman laadusta tinkimistä',
+      f4: 'Sitoutunut kumppani koko prosessin ajan',
+      f5: 'Kansainvälinen ulottuvuus, henkilökohtainen ote',
+      f6: 'Kokemus laajalta toimialakirjolta',
+      ctaH: 'Etsitkö seuraavaa tekijää?', ctaP: 'Ota yhteyttä ja kerrotaan, mitä tarvitset.', ctaBtn: 'Ota yhteyttä →',
+    },
+    seekers: {
+      eyebrow: 'Työnhakijoille', h1: 'Seuraava mahdollisuutesi\nalkaa täältä.',
+      sub: 'Työnhaun ei tarvitse olla monimutkaista. Me karsimme turhan byrokratian ja keskitymme olennaiseen – saat töihin nopeasti.',
+      h2a: 'Mitä odottaa',
+      p1: 'Kohtaamme sinut yksilönä, ei pelkkänä ansioluettelona. Ensikontaktista lähtien toimimme rivakasti. Ei pitkiä prosesseja eikä turhia välivaiheita – vain selkeä polku seuraavaan työpaikkaasi.',
+      h2b: 'Mitä tarjoamme',
+      f1: 'Nopea vastaus ja selkeä prosessi heti alusta alkaen',
+      f2: 'Henkilökohtainen tuki koko työnhaun ajan',
+      f3: 'Mahdollisuuksia laajasti eri toimialoilta ja tehtävistä',
+      f4: 'Kansainvälisiä sijoituksia saatavilla',
+      f5: 'Tiimi, joka on aidosti puolellasi',
+      f6: 'Ei turhaa paperisotaa tai viivyttelyä',
+      ctaH: 'Ota ensimmäinen askel.', ctaP: 'Lähetä tietosi tai selaa avoimia paikkoja – olemme sinuun pian yhteydessä.',
+      btn1: 'Avoimet työpaikat →', btn2: 'Ota yhteyttä',
+    },
+    about: {
+      eyebrow: 'Meistä', h1: 'Henkilöstöpalvelu\nuudella tavalla.',
+      sub: 'Rakennettu yksinkertaisen uskomuksen varaan – oikeiden ihmisten löytämisen pitäisi olla suoraviivaista, henkilökohtaista ja nopeaa.',
+      h2a: 'Keitä olemme',
+      p1: 'Foundryworks on kansainvälisesti toimiva henkilöstövuokraus- ja rekrytointiyritys, joka yhdistää yritykset tarvitsemaansa osaamiseen ja auttaa ihmisiä löytämään työtä, joka vastaa heidän taitojaan ja tavoitteitaan.',
+      p2: 'Emme usko tarpeettomaan monimutkaisuuteen. Lähestymistapamme on suora, prosessimme tehokas, ja fokuksemme on aina ihmisissä – olipa kyse kasvavasta yrityksestä tai uuden suunnan etsivästä ammattilaisesta.',
+      h2b: 'Mikä meitä ajaa',
+      p3: 'Henkilöstöala voi tuntua etäiseltä. Me ajattelemme, että sen ei pitäisi olla. Jokaisella yrityksellä on oma kulttuurinsa, jokaisella ihmisellä oma tarinansa. Otamme aikaa ymmärtää molempia – ja se tekee eron.',
+      h2c: 'Kokemus pohjana. Tulokset tavoitteena.',
+      p4: 'Tiimillämme on vuosien käytännön kokemus rekrytoinnista eri toimialoilla ja markkinoilla. Hyödynnämme tietotaitomme kestävien tulosten aikaansaamiseksi.',
+      f1: 'Kansainvälinen toiminta useilla markkinoilla',
+      f2: 'Syvä kokemus henkilöstöpalvelusta ja rekrytoinnista',
+      f3: 'Henkilökohtainen, suora lähestymistapa jokaiseen sijoitukseen',
+      f4: 'Pitkäaikaiset kumppanuudet asiakkaiden ja ehdokkaiden kanssa',
+      ctaH: 'Tehdään yhteistyötä.', ctaP: 'Oletpa yritys tai työnhakija – haluamme kuulla sinusta.', ctaBtn: 'Ota yhteyttä →',
+    },
+    jobs: {
+      eyebrow: 'Avoimet työpaikat', h1: 'Löydä seuraava\nmahdollisuutesi.',
+      sub: 'Selaa nykyisiä avoimia paikkojamme eri toimialoilta ja sijainneista.',
+      noH: 'Uusia paikkoja tulossa pian.',
+      noP: 'Päivitämme parhaillaan ilmoituksiamme. Lähetä tietosi ja otamme yhteyttä, kun sopiva paikka aukeaa.',
+      noBtn: 'Lähetä CV →',
+    },
+    contact: {
+      eyebrow: 'Yhteystiedot', h1: 'Jutellaan.',
+      sub: 'Etsitpä tekijää tai työtä – ota yhteyttä ja hoidetaan asia kuntoon.',
+      h2: 'Ota yhteyttä',
+      p: 'Vastaamme nopeasti. Ei turhaa edestakaisin viestittelyä – vain suora keskustelu tarpeistasi.',
+      intl: 'Toiminta kansainvälisesti',
+      formH: 'Lähetä viesti',
+      nameL: 'Nimesi', nameP: 'Matti Meikäläinen',
+      emailL: 'Sähköpostiosoite', emailP: 'matti@yritys.fi',
+      roleL: 'Olen...', role1: 'Yritys, joka etsii tekijää', role2: 'Työnhakija', role3: 'Muu',
+      msgL: 'Viesti', msgP: 'Kerro mitä etsit...',
+      send: 'Lähetä viesti →',
+    },
+  },
+  et: {
+    nav: { jobs: 'Vabad töökohad', clients: 'Ettevõtetele', seekers: 'Tööotsijatele', about: 'Meist', contact: 'Kontakt' },
+    home: {
+      eyebrow: 'Rahvusvaheline personaliteenus',
+      h1a: 'Õiged inimesed,', h1b: 'õigel ajal.',
+      sub: 'Foundryworks ühendab ettevõtted oskuslike spetsialistidega ja aitab inimestel leida sobivat tööd – kiiresti ja ilma tarbetu bürokraatiata.',
+      btn1: 'Vaata vabade kohti', btn2: 'Võta ühendust',
+      stat1: 'Edukalt paigutatud', stat2: 'Klientettevõtet', stat3: 'Riiki', stat4: 'Aastat kogemust',
+      whatLabel: 'Mida me teeme', whatH2: 'Personaliteenus,\nmis toimib mõlemale.',
+      whatSub: 'Kas olete ettevõte, kes soovib meeskonda kasvatada, või professionaal, kes on valmis uueks väljakutseks – oleme siin, et see teoks teha.',
+      card1h: 'Ettevõtetele', card1p: 'Haldame värbamist algusest lõpuni – leiame teie ettevõttele sobivad inimesed kiiresti. Paindlikud lahendused kõikidele personalivajadusele.', card1a: 'Loe lähemalt →',
+      card2h: 'Tööotsijatele', card2p: 'Pole pikki protsesse ega tarbetuid samme. Tegutseme kiiresti ja otsime just teile sobivaid võimalusi.', card2a: 'Loe lähemalt →',
+      card3h: 'Rahvusvaheline haare', card3p: 'Tegutseme üle piiride, säilitades isikliku lähenemise. Globaalne ulatus ilma inimlikku elementi kaotamata.', card3a: 'Meist →',
+      ctaH: 'Otsite järgmist töötajat?', ctaP: 'Võtke ühendust – rääkige oma vajadusest ja meie tegeleme ülejäänuga.', ctaBtn: 'Võta ühendust',
+      footer: 'Rahvusvaheline personaliteenus',
+    },
+    clients: {
+      eyebrow: 'Ettevõtetele', h1: 'Täpne sobivus\nigal korral.',
+      sub: 'Usaldusväärsete töötajate leidmine ei peaks teie äri aeglustama. Ühendame ettevõtted motiveeritud spetsialistidega – kiiresti ja ilma tarbetu keerukuseta.',
+      h2a: 'Kuidas me töötame',
+      p1: 'Võtame aega, et mõista teie ettevõtet, kultuuri ja seda, mida uuelt töötajalt tegelikult vajate. See tähendab paremaid kokku sobivusi, sujuvamat sisseelamist ja inimesi, kes meeskonda tõeliselt sobivad.',
+      p2: 'Haldame kogu protsessi esimesest vestlusest kuni lõpliku paigutuseni – nii et teie ei pea.',
+      h2b: 'Miks Foundryworks',
+      f1: 'Paindlikud lahendused lühi- ja pikaajalistele personalivajadusele',
+      f2: 'Põhjalik kandidaatide valik – kohtute ainult sobivate inimestega',
+      f3: 'Kiire ja reageeriv teenus ilma kvaliteedist järeleandmata',
+      f4: 'Pühendunud partner kogu protsessi vältel',
+      f5: 'Rahvusvaheline haare isikliku lähenemisega',
+      f6: 'Kogemus paljudes erinevates valdkondades',
+      ctaH: 'Otsite järgmist töötajat?', ctaP: 'Võtke ühendust ja räägime, mida vajate.', ctaBtn: 'Võta ühendust →',
+    },
+    seekers: {
+      eyebrow: 'Tööotsijatele', h1: 'Teie järgmine võimalus\nalgab siit.',
+      sub: 'Töö otsimine ei pea olema keeruline. Lõikame läbi bürokraatia ja keskendume olulisele – viime teid tööle kiiresti.',
+      h2a: 'Mida oodata',
+      p1: 'Suhtume teisse indiviidina, mitte lihtsalt CV-na. Esimesest kontaktist alates tegutseme kiiresti. Pole pikki protsesse ega tarbetuid samme – ainult selge tee järgmise töökohani.',
+      h2b: 'Mida pakume',
+      f1: 'Kiire vastus ja selge protsess esimesest päevast',
+      f2: 'Isiklik tugi kogu tööotsingu vältel',
+      f3: 'Võimalused paljudes eri valdkondades ja ametikohtadel',
+      f4: 'Rahvusvahelised paigutused saadaval',
+      f5: 'Meeskond, kes on tõeliselt teie poolel',
+      f6: 'Pole tarbetut paberimajandust ega viivitusi',
+      ctaH: 'Astuge esimene samm.', ctaP: 'Saatke oma andmed või vaadake vabade kohti – võtame peagi ühendust.',
+      btn1: 'Vabad töökohad →', btn2: 'Võta ühendust',
+    },
+    about: {
+      eyebrow: 'Meist', h1: 'Personaliteenus\nteisiti.',
+      sub: 'Rajatud lihtsale veendumusele – õigete inimeste leidmine peaks olema lihtne, isiklik ja kiire.',
+      h2a: 'Kes me oleme',
+      p1: 'Foundryworks on rahvusvaheliselt tegutsev personaliteenus- ja värbamisettevõte, mis ühendab ettevõtted vajaliku talendiga ning aitab inimestel leida tööd, mis vastab nende oskustele ja ambitsioonidele.',
+      p2: 'Me ei usu tarbetutesse keerukustesse. Meie lähenemine on otsekohene, protsess on tõhus ja fookus on alati inimestel.',
+      h2b: 'Mis meid ajendab',
+      p3: 'Personaliteenus võib olla isikupäratu. Meie arvates ei peaks see nii olema. Igal ettevõttel on oma kultuur, igal inimesel oma lugu. Võtame aega, et mõista mõlemat – ja see teebki erinevuse.',
+      h2c: 'Kogemusele tuginev. Tulemustele fokuseeritud.',
+      p4: 'Meie meeskonnal on aastaid praktilist kogemust värbamises eri valdkondades ja turgudel. Kasutame seda teadmist kestvate tulemuste saavutamiseks.',
+      f1: 'Rahvusvaheline tegevus mitmel turul',
+      f2: 'Sügav kogemus personaliteenuses ja värbamises',
+      f3: 'Isiklik, otsekohene lähenemine igale paigutusele',
+      f4: 'Pikaajalised partnerlussuhted klientide ja kandidaatidega',
+      ctaH: 'Teeme koostööd.', ctaP: 'Olgu tegemist ettevõtte või tööotsijaga – soovime teid kuulda.', ctaBtn: 'Võta ühendust →',
+    },
+    jobs: {
+      eyebrow: 'Vabad töökohad', h1: 'Leidke oma järgmine\nvõimalus.',
+      sub: 'Sirvige meie praeguseid vabade kohtade kuulutusi eri valdkondades ja piirkondades.',
+      noH: 'Uued kohad tulevad peagi.',
+      noP: 'Uuendame praegu oma kuulutusi. Saatke oma andmed ja võtame ühendust, kui sobiv koht avaneb.',
+      noBtn: 'Saada CV →',
+    },
+    contact: {
+      eyebrow: 'Kontakt', h1: 'Räägime.',
+      sub: 'Kas otsite töötajat või tööd – võtke ühendust ja tegeleme asjaga.',
+      h2: 'Võtke ühendust',
+      p: 'Vastame kiiresti. Pole tarbetut edasi-tagasi kirjavahetust – ainult otsekohene vestlus teie vajadustest.',
+      intl: 'Tegutseme rahvusvaheliselt',
+      formH: 'Saada sõnum',
+      nameL: 'Teie nimi', nameP: 'Jaan Tamm',
+      emailL: 'E-posti aadress', emailP: 'jaan@ettevote.ee',
+      roleL: 'Olen...', role1: 'Ettevõte, kes otsib töötajat', role2: 'Tööotsija', role3: 'Muu',
+      msgL: 'Sõnum', msgP: 'Rääkige, mida otsite...',
+      send: 'Saada sõnum →',
+    },
+  },
+  ru: {
+    nav: { jobs: 'Вакансии', clients: 'Для компаний', seekers: 'Соискателям', about: 'О нас', contact: 'Контакты' },
+    home: {
+      eyebrow: 'Международный кадровый сервис',
+      h1a: 'Нужные люди —', h1b: 'в нужное время.',
+      sub: 'Foundryworks соединяет компании с квалифицированными специалистами и помогает людям найти работу, которая им подходит — быстро и без лишней бюрократии.',
+      btn1: 'Смотреть вакансии', btn2: 'Связаться с нами',
+      stat1: 'Успешных размещений', stat2: 'Компаний-клиентов', stat3: 'Стран', stat4: 'Лет опыта',
+      whatLabel: 'Что мы делаем', whatH2: 'Кадровый сервис,\nкоторый работает для всех.',
+      whatSub: 'Развиваете бизнес или ищете новую должность — мы здесь, чтобы это реализовать.',
+      card1h: 'Для компаний', card1p: 'Берём на себя весь процесс подбора — от начала до конца. Гибкие решения для любых кадровых задач.', card1a: 'Подробнее →',
+      card2h: 'Соискателям', card2p: 'Никаких затяжных процессов и лишних шагов. Действуем быстро и ищем возможности именно для вас.', card2a: 'Подробнее →',
+      card3h: 'Международный охват', card3p: 'Работаем без границ, сохраняя личный подход. Глобальный масштаб — человеческий формат.', card3a: 'О нас →',
+      ctaH: 'Ищете следующего сотрудника?', ctaP: 'Свяжитесь с нами — расскажите о своих потребностях, мы займёмся остальным.', ctaBtn: 'Связаться',
+      footer: 'Международный кадровый сервис',
+    },
+    clients: {
+      eyebrow: 'Для компаний', h1: 'Точное совпадение\nкаждый раз.',
+      sub: 'Поиск надёжных сотрудников не должен тормозить ваш бизнес. Мы соединяем компании с мотивированными специалистами — быстро и без лишних сложностей.',
+      h2a: 'Как мы работаем',
+      p1: 'Мы вникаем в специфику вашего бизнеса, корпоративную культуру и реальные потребности. Это означает лучшее совпадение, более лёгкую адаптацию и людей, которые действительно вписываются в команду.',
+      p2: 'Весь процесс — от первого разговора до финального трудоустройства — мы берём на себя.',
+      h2b: 'Почему Foundryworks',
+      f1: 'Гибкие решения для краткосрочных и долгосрочных задач',
+      f2: 'Тщательный отбор кандидатов — вы встречаете только подходящих',
+      f3: 'Быстрый и чёткий сервис без компромиссов по качеству',
+      f4: 'Надёжный партнёр на всём протяжении процесса',
+      f5: 'Международный охват с личным подходом',
+      f6: 'Опыт в самых разных отраслях',
+      ctaH: 'Ищете следующего сотрудника?', ctaP: 'Свяжитесь с нами и расскажите о своих потребностях.', ctaBtn: 'Связаться →',
+    },
+    seekers: {
+      eyebrow: 'Соискателям', h1: 'Ваш следующий шаг\nначинается здесь.',
+      sub: 'Поиск работы не должен быть сложным. Мы убираем лишнюю бюрократию и фокусируемся на главном — помочь вам выйти на работу быстро.',
+      h2a: 'Чего ожидать',
+      p1: 'Мы работаем с вами как с личностью, а не просто с резюме. С первого контакта действуем оперативно. Никаких затяжных процессов и лишних шагов — только чёткий путь к вашей следующей работе.',
+      h2b: 'Что мы предлагаем',
+      f1: 'Быстрый отклик и понятный процесс с первого дня',
+      f2: 'Личное сопровождение на протяжении всего поиска',
+      f3: 'Возможности в широком спектре отраслей и должностей',
+      f4: 'Международное трудоустройство доступно',
+      f5: 'Команда, которая искренне на вашей стороне',
+      f6: 'Никакой лишней бумажной волокиты и задержек',
+      ctaH: 'Сделайте первый шаг.', ctaP: 'Отправьте свои данные или просмотрите вакансии — мы свяжемся с вами в ближайшее время.',
+      btn1: 'Смотреть вакансии →', btn2: 'Связаться',
+    },
+    about: {
+      eyebrow: 'О нас', h1: 'Кадровый сервис\nпо-другому.',
+      sub: 'В основе — простое убеждение: поиск нужных людей должен быть понятным, личным и быстрым.',
+      h2a: 'Кто мы',
+      p1: 'Foundryworks — международная компания по подбору и аренде персонала. Мы соединяем бизнес с нужными специалистами и помогаем людям найти работу, соответствующую их навыкам и амбициям.',
+      p2: 'Мы не верим в излишнюю сложность. Наш подход прямой, процесс эффективный, а фокус всегда на людях.',
+      h2b: 'Что нами движет',
+      p3: 'Кадровая отрасль бывает безличной. Мы считаем, что так быть не должно. У каждой компании своя культура, у каждого человека своя история. Мы находим время понять и то, и другое — и именно это делает разницу.',
+      h2c: 'Опыт как основа. Результат как цель.',
+      p4: 'Наша команда обладает многолетним практическим опытом в рекрутинге в разных отраслях и на разных рынках. Мы применяем эти знания для достижения устойчивых результатов.',
+      f1: 'Международная деятельность на нескольких рынках',
+      f2: 'Глубокая экспертиза в подборе персонала',
+      f3: 'Личный, прямой подход к каждому трудоустройству',
+      f4: 'Долгосрочные партнёрства с клиентами и кандидатами',
+      ctaH: 'Давайте работать вместе.', ctaP: 'Компания вы или соискатель — мы будем рады вас услышать.', ctaBtn: 'Связаться →',
+    },
+    jobs: {
+      eyebrow: 'Вакансии', h1: 'Найдите свою\nследующую возможность.',
+      sub: 'Просматривайте актуальные вакансии в самых разных отраслях и регионах.',
+      noH: 'Новые вакансии появятся скоро.',
+      noP: 'Мы обновляем наши объявления. Отправьте свои данные, и мы свяжемся с вами, когда появится подходящая вакансия.',
+      noBtn: 'Отправить резюме →',
+    },
+    contact: {
+      eyebrow: 'Контакты', h1: 'Поговорим.',
+      sub: 'Ищете сотрудника или работу — свяжитесь с нами и мы займёмся этим вместе.',
+      h2: 'Свяжитесь с нами',
+      p: 'Отвечаем быстро. Никаких лишних переписок — только прямой разговор о ваших потребностях.',
+      intl: 'Работаем по всему миру',
+      formH: 'Написать сообщение',
+      nameL: 'Ваше имя', nameP: 'Иван Петров',
+      emailL: 'Электронная почта', emailP: 'ivan@company.ru',
+      roleL: 'Я являюсь...', role1: 'Компанией в поиске сотрудника', role2: 'Соискателем', role3: 'Другое',
+      msgL: 'Сообщение', msgP: 'Расскажите, что вы ищете...',
+      send: 'Отправить →',
+    },
+  },
+  de: {
+    nav: { jobs: 'Offene Stellen', clients: 'Für Unternehmen', seekers: 'Für Bewerber', about: 'Über uns', contact: 'Kontakt' },
+    home: {
+      eyebrow: 'Internationale Personal- und Arbeitsvermittlung',
+      h1a: 'Die richtigen Menschen,', h1b: 'genau dann, wenn Sie sie brauchen.',
+      sub: 'Foundryworks verbindet Unternehmen mit qualifizierten Fachkräften und hilft Menschen, die passende Stelle zu finden – schnell und ohne unnötige Bürokratie.',
+      btn1: 'Offene Stellen ansehen', btn2: 'Kontakt aufnehmen',
+      stat1: 'Erfolgreiche Vermittlungen', stat2: 'Kundenunternehmen', stat3: 'Länder', stat4: 'Jahre Erfahrung',
+      whatLabel: 'Was wir tun', whatH2: 'Personalvermittlung,\ndie für beide Seiten funktioniert.',
+      whatSub: 'Ob Sie ein Unternehmen sind, das wächst, oder ein Profi, der den nächsten Schritt macht – wir sind da, um es möglich zu machen.',
+      card1h: 'Für Unternehmen', card1p: 'Wir übernehmen die gesamte Rekrutierung von Anfang bis Ende – schnell und mit passgenauer Besetzung für Ihr Unternehmen.', card1a: 'Mehr erfahren →',
+      card2h: 'Für Bewerber', card2p: 'Keine langen Prozesse, keine unnötigen Schritte. Wir handeln schnell und finden gezielt Möglichkeiten, die zu Ihnen passen.', card2a: 'Mehr erfahren →',
+      card3h: 'Internationale Reichweite', card3p: 'Wir arbeiten grenzüberschreitend, ohne die persönliche Note zu verlieren. Globale Stärke, menschliche Nähe.', card3a: 'Über uns →',
+      ctaH: 'Bereit für Ihre nächste Einstellung?', ctaP: 'Sprechen Sie uns an – schildern Sie Ihren Bedarf und wir kümmern uns um den Rest.', ctaBtn: 'Kontakt aufnehmen',
+      footer: 'Internationale Personal- und Arbeitsvermittlung',
+    },
+    clients: {
+      eyebrow: 'Für Unternehmen', h1: 'Die richtige Besetzung,\njedes Mal.',
+      sub: 'Die Suche nach zuverlässigen Mitarbeitern sollte Ihr Geschäft nicht ausbremsen. Wir verbinden Unternehmen mit motivierten Fachkräften – schnell und ohne unnötige Komplexität.',
+      h2a: 'So arbeiten wir',
+      p1: 'Wir nehmen uns die Zeit, Ihr Unternehmen, Ihre Kultur und Ihren tatsächlichen Bedarf zu verstehen. Das Ergebnis: bessere Passung, reibungsloseres Onboarding und Menschen, die wirklich ins Team passen.',
+      p2: 'Vom ersten Gespräch bis zur finalen Vermittlung übernehmen wir den gesamten Prozess – damit Sie es nicht müssen.',
+      h2b: 'Warum Foundryworks',
+      f1: 'Flexible Lösungen für kurz- und langfristige Personalbedarfe',
+      f2: 'Sorgfältige Kandidatenauswahl – Sie treffen nur die richtigen',
+      f3: 'Schneller, reaktionsstarker Service ohne Abstriche bei der Qualität',
+      f4: 'Ein verlässlicher Partner während des gesamten Prozesses',
+      f5: 'Internationale Reichweite mit persönlicher Betreuung',
+      f6: 'Erfahrung in einer Vielzahl von Branchen',
+      ctaH: 'Bereit für Ihre nächste Einstellung?', ctaP: 'Nehmen Sie Kontakt auf und erzählen Sie uns, was Sie benötigen.', ctaBtn: 'Kontakt aufnehmen →',
+    },
+    seekers: {
+      eyebrow: 'Für Bewerber', h1: 'Ihre nächste Chance\nbeginnt hier.',
+      sub: 'Jobsuche muss nicht kompliziert sein. Wir räumen die Bürokratie aus dem Weg und konzentrieren uns auf das Wesentliche – Sie kommen schnell in Arbeit.',
+      h2a: 'Was Sie erwartet',
+      p1: 'Wir sehen Sie als Mensch, nicht nur als Lebenslauf. Vom ersten Kontakt an handeln wir zügig. Keine langen Prozesse, keine unnötigen Zwischenschritte – nur ein klarer Weg zu Ihrer nächsten Stelle.',
+      h2b: 'Was wir bieten',
+      f1: 'Schnelle Rückmeldung und ein klarer Ablauf von Anfang an',
+      f2: 'Persönliche Begleitung während Ihrer gesamten Jobsuche',
+      f3: 'Stellen in einem breiten Spektrum an Branchen und Berufsfeldern',
+      f4: 'Internationale Vermittlungen möglich',
+      f5: 'Ein Team, das wirklich auf Ihrer Seite steht',
+      f6: 'Kein unnötiger Papierkram, keine Verzögerungen',
+      ctaH: 'Machen Sie den ersten Schritt.', ctaP: 'Schicken Sie uns Ihre Unterlagen oder schauen Sie sich unsere offenen Stellen an – wir melden uns bald.',
+      btn1: 'Offene Stellen →', btn2: 'Kontakt aufnehmen',
+    },
+    about: {
+      eyebrow: 'Über uns', h1: 'Personalvermittlung\nanders gedacht.',
+      sub: 'Gegründet auf eine einfache Überzeugung – die richtigen Menschen zu finden sollte unkompliziert, persönlich und schnell sein.',
+      h2a: 'Wer wir sind',
+      p1: 'Foundryworks ist ein international tätiges Unternehmen für Personalvermittlung und Arbeitnehmerüberlassung. Wir verbinden Unternehmen mit den Talenten, die sie brauchen, und helfen Menschen, eine Stelle zu finden, die zu ihren Fähigkeiten und Ambitionen passt.',
+      p2: 'Wir glauben nicht an unnötige Komplexität. Unser Ansatz ist direkt, unser Prozess effizient, und unser Fokus liegt immer auf den Menschen.',
+      h2b: 'Was uns antreibt',
+      p3: 'Die Personalbranche kann unpersönlich wirken. Wir finden, das sollte nicht so sein. Jedes Unternehmen hat seine eigene Kultur, jeder Mensch seine eigene Geschichte. Wir nehmen uns die Zeit, beides zu verstehen – und genau das macht den Unterschied.',
+      h2c: 'Erfahrung als Fundament. Ergebnisse als Ziel.',
+      p4: 'Unser Team verfügt über jahrelange Praxiserfahrung in der Personalvermittlung, branchenübergreifend und in verschiedenen Märkten. Dieses Wissen nutzen wir, um nachhaltige Ergebnisse zu erzielen.',
+      f1: 'Internationale Tätigkeit in mehreren Märkten',
+      f2: 'Tiefgreifende Erfahrung in Personalvermittlung und Rekrutierung',
+      f3: 'Persönlicher, direkter Ansatz bei jeder Vermittlung',
+      f4: 'Langfristige Partnerschaften mit Kunden und Kandidaten',
+      ctaH: 'Lassen Sie uns zusammenarbeiten.', ctaP: 'Ob Unternehmen oder Bewerber – wir freuen uns, von Ihnen zu hören.', ctaBtn: 'Kontakt aufnehmen →',
+    },
+    jobs: {
+      eyebrow: 'Offene Stellen', h1: 'Finden Sie Ihre\nnächste Chance.',
+      sub: 'Stöbern Sie in unseren aktuellen Stellenangeboten aus verschiedenen Branchen und Regionen.',
+      noH: 'Neue Stellen kommen bald.',
+      noP: 'Wir aktualisieren gerade unsere Anzeigen. Schicken Sie uns Ihre Unterlagen – wir melden uns, sobald die passende Stelle verfügbar ist.',
+      noBtn: 'Lebenslauf einsenden →',
+    },
+    contact: {
+      eyebrow: 'Kontakt', h1: 'Sprechen wir.',
+      sub: 'Ob Sie einstellen oder einen Job suchen – nehmen Sie Kontakt auf und wir kümmern uns darum.',
+      h2: 'Kontakt aufnehmen',
+      p: 'Wir antworten schnell. Kein unnötiges Hin und Her – nur ein direktes Gespräch über das, was Sie brauchen.',
+      intl: 'International tätig',
+      formH: 'Nachricht senden',
+      nameL: 'Ihr Name', nameP: 'Max Mustermann',
+      emailL: 'E-Mail-Adresse', emailP: 'max@unternehmen.de',
+      roleL: 'Ich bin...', role1: 'Unternehmen auf der Suche nach Personal', role2: 'Bewerber', role3: 'Sonstiges',
+      msgL: 'Nachricht', msgP: 'Erzählen Sie uns, was Sie suchen...',
+      send: 'Nachricht senden →',
+    },
+  },
+  es: {
+    nav: { jobs: 'Empleos', clients: 'Para empresas', seekers: 'Para candidatos', about: 'Quiénes somos', contact: 'Contacto' },
+    home: {
+      eyebrow: 'Selección de personal internacional',
+      h1a: 'Las personas adecuadas,', h1b: 'en el momento justo.',
+      sub: 'Foundryworks conecta empresas con profesionales cualificados y ayuda a las personas a encontrar el trabajo que encaja con ellas — con rapidez y sin trámites innecesarios.',
+      btn1: 'Ver ofertas de empleo', btn2: 'Contactar',
+      stat1: 'Colocaciones realizadas', stat2: 'Empresas clientes', stat3: 'Países', stat4: 'Años de experiencia',
+      whatLabel: 'Qué hacemos', whatH2: 'Una selección de personal\nque funciona para todos.',
+      whatSub: 'Tanto si eres una empresa que quiere crecer como un profesional listo para dar el siguiente paso, estamos aquí para hacerlo realidad.',
+      card1h: 'Para empresas', card1p: 'Gestionamos todo el proceso de selección de principio a fin — encontramos a las personas adecuadas para tu empresa, con rapidez y eficacia.', card1a: 'Saber más →',
+      card2h: 'Para candidatos', card2p: 'Sin procesos interminables ni pasos innecesarios. Actuamos rápido y buscamos oportunidades que se ajusten a tu perfil.', card2a: 'Saber más →',
+      card3h: 'Alcance internacional', card3p: 'Trabajamos sin fronteras sin perder el trato personal. Presencia global, enfoque humano.', card3a: 'Quiénes somos →',
+      ctaH: '¿Buscas a tu próxima incorporación?', ctaP: 'Cuéntanos lo que necesitas. Nosotros nos encargamos del resto.', ctaBtn: 'Contactar',
+      footer: 'Selección de personal internacional',
+    },
+    clients: {
+      eyebrow: 'Para empresas', h1: 'El perfil exacto,\ncada vez.',
+      sub: 'Encontrar trabajadores de confianza no debería frenar tu negocio. Conectamos empresas con profesionales motivados — con agilidad y sin complicaciones.',
+      h2a: 'Cómo trabajamos',
+      p1: 'Nos tomamos el tiempo necesario para entender tu empresa, tu cultura y lo que realmente necesitas en una nueva incorporación. Eso se traduce en mejores encajes, una integración más fluida y personas que de verdad se adaptan a tu equipo.',
+      p2: 'Desde la primera conversación hasta la incorporación final, gestionamos todo el proceso para que tú no tengas que hacerlo.',
+      h2b: 'Por qué Foundryworks',
+      f1: 'Soluciones flexibles para necesidades temporales y permanentes',
+      f2: 'Selección exhaustiva de candidatos — solo conoces a los adecuados',
+      f3: 'Servicio ágil y resolutivo sin comprometer la calidad',
+      f4: 'Un socio comprometido durante todo el proceso',
+      f5: 'Alcance internacional con trato cercano',
+      f6: 'Experiencia en una amplia variedad de sectores',
+      ctaH: '¿Buscas a tu próxima incorporación?', ctaP: 'Contáctanos y cuéntanos qué necesitas.', ctaBtn: 'Contactar →',
+    },
+    seekers: {
+      eyebrow: 'Para candidatos', h1: 'Tu próxima oportunidad\nempieza aquí.',
+      sub: 'Buscar trabajo no tiene por qué ser complicado. Eliminamos la burocracia y nos centramos en lo importante — que empieces a trabajar cuanto antes.',
+      h2a: 'Qué esperar',
+      p1: 'Te tratamos como una persona, no solo como un CV. Desde el primer contacto, nos movemos con rapidez. Sin procesos largos ni pasos innecesarios — solo un camino directo hacia tu próximo empleo.',
+      h2b: 'Qué ofrecemos',
+      f1: 'Respuesta rápida y un proceso claro desde el primer día',
+      f2: 'Acompañamiento personalizado durante toda tu búsqueda',
+      f3: 'Oportunidades en una gran variedad de sectores y perfiles',
+      f4: 'Colocaciones internacionales disponibles',
+      f5: 'Un equipo que genuinamente está de tu lado',
+      f6: 'Sin papeleo innecesario ni demoras',
+      ctaH: 'Da el primer paso.', ctaP: 'Envíanos tus datos o consulta nuestras ofertas — nos pondremos en contacto pronto.',
+      btn1: 'Ver ofertas →', btn2: 'Contactar',
+    },
+    about: {
+      eyebrow: 'Quiénes somos', h1: 'Selección de personal\ncon un enfoque diferente.',
+      sub: 'Construida sobre una convicción sencilla — encontrar a las personas adecuadas debería ser algo directo, personal y rápido.',
+      h2a: 'Quiénes somos',
+      p1: 'Foundryworks es una empresa de selección y trabajo temporal con operaciones internacionales. Conectamos a las empresas con el talento que necesitan y ayudamos a las personas a encontrar un trabajo acorde a sus habilidades y ambiciones.',
+      p2: 'No creemos en las complejidades innecesarias. Nuestro enfoque es directo, nuestro proceso eficiente, y nuestra atención está siempre puesta en las personas.',
+      h2b: 'Qué nos impulsa',
+      p3: 'El sector del trabajo temporal puede resultar impersonal. Nosotros creemos que no debería serlo. Cada empresa tiene su propia cultura y cada persona su propia historia. Nos tomamos el tiempo de entender ambas — y eso es lo que marca la diferencia.',
+      h2c: 'Experiencia como base. Resultados como meta.',
+      p4: 'Nuestro equipo cuenta con años de experiencia práctica en selección de personal en distintos sectores y mercados. Ponemos ese conocimiento al servicio de resultados duraderos.',
+      f1: 'Operaciones internacionales en múltiples mercados',
+      f2: 'Profunda experiencia en selección y trabajo temporal',
+      f3: 'Enfoque personal y directo en cada colocación',
+      f4: 'Relaciones a largo plazo con clientes y candidatos',
+      ctaH: 'Trabajemos juntos.', ctaP: 'Seas empresa o candidato, nos encantaría saber de ti.', ctaBtn: 'Contactar →',
+    },
+    jobs: {
+      eyebrow: 'Empleos', h1: 'Encuentra tu próxima\noportunidad.',
+      sub: 'Consulta nuestras ofertas actuales en una gran variedad de sectores y ubicaciones.',
+      noH: 'Próximamente nuevas ofertas.',
+      noP: 'Estamos actualizando nuestras publicaciones. Envíanos tus datos y te contactaremos cuando surja la oportunidad adecuada.',
+      noBtn: 'Enviar CV →',
+    },
+    contact: {
+      eyebrow: 'Contacto', h1: 'Hablemos.',
+      sub: 'Tanto si quieres contratar como si buscas trabajo, contáctanos y nos encargamos.',
+      h2: 'Ponte en contacto',
+      p: 'Respondemos con rapidez. Sin idas y venidas innecesarias — solo una conversación directa sobre lo que necesitas.',
+      intl: 'Operamos internacionalmente',
+      formH: 'Enviar un mensaje',
+      nameL: 'Tu nombre', nameP: 'Juan García',
+      emailL: 'Correo electrónico', emailP: 'juan@empresa.es',
+      roleL: 'Soy...', role1: 'Una empresa que busca personal', role2: 'Un candidato', role3: 'Otro',
+      msgL: 'Mensaje', msgP: 'Cuéntanos qué estás buscando...',
+      send: 'Enviar mensaje →',
+    },
+  },
+  sv: {
+    nav: { jobs: 'Lediga tjänster', clients: 'För företag', seekers: 'För jobbsökande', about: 'Om oss', contact: 'Kontakt' },
+    home: {
+      eyebrow: 'Internationell bemanning och rekrytering',
+      h1a: 'Rätt personer,', h1b: 'när du behöver dem.',
+      sub: 'Foundryworks förbinder företag med kvalificerade yrkespersoner och hjälper människor att hitta ett arbete som passar dem — snabbt och utan onödig byråkrati.',
+      btn1: 'Se lediga tjänster', btn2: 'Kontakta oss',
+      stat1: 'Genomförda placeringar', stat2: 'Kundföretag', stat3: 'Länder', stat4: 'Års erfarenhet',
+      whatLabel: 'Vad vi gör', whatH2: 'Bemanning som fungerar\nför båda parter.',
+      whatSub: 'Vare sig du driver ett företag som vill växa eller är redo för nästa karriärsteg — vi är här för att göra det möjligt.',
+      card1h: 'För företag', card1p: 'Vi sköter hela rekryteringsprocessen från start till mål — hittar rätt person för ditt företag, snabbt och träffsäkert.', card1a: 'Läs mer →',
+      card2h: 'För jobbsökande', card2p: 'Inga utdragna processer, inga onödiga steg. Vi rör oss snabbt och letar aktivt efter möjligheter som passar just dig.', card2a: 'Läs mer →',
+      card3h: 'Internationell räckvidd', card3p: 'Vi arbetar över gränser utan att tappa den personliga touchen. Global styrka, mänsklig närvaro.', card3a: 'Om oss →',
+      ctaH: 'Redo att hitta din nästa medarbetare?', ctaP: 'Hör av dig — berätta vad du behöver så tar vi hand om resten.', ctaBtn: 'Kontakta oss',
+      footer: 'Internationell bemanning och rekrytering',
+    },
+    clients: {
+      eyebrow: 'För företag', h1: 'Rätt matchning,\nvarje gång.',
+      sub: 'Att hitta pålitliga medarbetare ska inte bromsa din verksamhet. Vi kopplar samman företag med motiverade yrkespersoner — snabbt och utan onödig komplexitet.',
+      h2a: 'Så här arbetar vi',
+      p1: 'Vi tar oss tid att förstå ditt företag, din kultur och vad du faktiskt behöver av en ny medarbetare. Det ger bättre matchning, smidigare introduktion och människor som verkligen passar in i teamet.',
+      p2: 'Från första samtal till slutgiltig placering hanterar vi hela processen — så att du slipper.',
+      h2b: 'Varför Foundryworks',
+      f1: 'Flexibla lösningar för kort- och långsiktiga bemanningsbehov',
+      f2: 'Grundlig kandidatgranskning — du träffar bara rätt personer',
+      f3: 'Snabb och lyhörd service utan att kompromissa med kvaliteten',
+      f4: 'En dedikerad partner genom hela processen',
+      f5: 'Internationell räckvidd med personlig touch',
+      f6: 'Erfarenhet från en lång rad branscher',
+      ctaH: 'Redo att hitta din nästa medarbetare?', ctaP: 'Hör av dig och berätta vad du behöver.', ctaBtn: 'Kontakta oss →',
+    },
+    seekers: {
+      eyebrow: 'För jobbsökande', h1: 'Din nästa möjlighet\nstarter här.',
+      sub: 'Att söka jobb behöver inte vara krångligt. Vi skär igenom byråkratin och fokuserar på det som spelar roll — att du snabbt kommer ut i arbete.',
+      h2a: 'Vad du kan förvänta dig',
+      p1: 'Vi ser dig som en individ, inte bara ett CV. Från första kontakten rör vi oss snabbt. Inga utdragna processer, inga onödiga steg — bara en rak väg till ditt nästa jobb.',
+      h2b: 'Vad vi erbjuder',
+      f1: 'Snabb återkoppling och en tydlig process från dag ett',
+      f2: 'Personligt stöd under hela din jobbsökning',
+      f3: 'Möjligheter inom ett brett spektrum av branscher och roller',
+      f4: 'Internationella placeringar tillgängliga',
+      f5: 'Ett team som genuint är på din sida',
+      f6: 'Ingen onödig administration eller förseningar',
+      ctaH: 'Ta det första steget.', ctaP: 'Skicka dina uppgifter eller kika på lediga tjänster — vi hör av oss snart.',
+      btn1: 'Lediga tjänster →', btn2: 'Kontakta oss',
+    },
+    about: {
+      eyebrow: 'Om oss', h1: 'Bemanning\npå ett annat sätt.',
+      sub: 'Grundat på en enkel övertygelse — att hitta rätt människor ska vara okomplicerat, personligt och snabbt.',
+      h2a: 'Vilka vi är',
+      p1: 'Foundryworks är ett internationellt verksamt bemanning- och rekryteringsföretag som förbinder företag med de talanger de behöver och hjälper människor att hitta arbete som matchar deras kompetens och ambitioner.',
+      p2: 'Vi tror inte på onödig komplexitet. Vår approach är direkt, vår process effektiv, och vårt fokus är alltid på människorna.',
+      h2b: 'Vad som driver oss',
+      p3: 'Bemanningsbranschen kan kännas opersonlig. Vi tycker inte att den behöver vara det. Varje företag har sin kultur och varje människa sin historia. Vi tar oss tid att förstå båda — och det är det som gör skillnaden.',
+      h2c: 'Erfarenhet som grund. Resultat som mål.',
+      p4: 'Vårt team har mångårig praktisk erfarenhet av rekrytering inom olika branscher och marknader. Den kunskapen använder vi för att leverera resultat som håller.',
+      f1: 'Internationell verksamhet på flera marknader',
+      f2: 'Djup erfarenhet inom bemanning och rekrytering',
+      f3: 'Personlig, direkt approach i varje placering',
+      f4: 'Långsiktiga partnerskap med kunder och kandidater',
+      ctaH: 'Låt oss samarbeta.', ctaP: 'Oavsett om du är ett företag eller en jobbsökande — vi vill gärna höra från dig.', ctaBtn: 'Kontakta oss →',
+    },
+    jobs: {
+      eyebrow: 'Lediga tjänster', h1: 'Hitta din nästa\nmöjlighet.',
+      sub: 'Bläddra bland våra aktuella lediga tjänster inom en rad branscher och orter.',
+      noH: 'Nya tjänster kommer snart.',
+      noP: 'Vi uppdaterar just nu våra annonser. Skicka dina uppgifter så hör vi av oss när rätt möjlighet dyker upp.',
+      noBtn: 'Skicka ditt CV →',
+    },
+    contact: {
+      eyebrow: 'Kontakt', h1: 'Vi ses.',
+      sub: 'Vare sig du vill anställa eller söker jobb — hör av dig så löser vi det tillsammans.',
+      h2: 'Hör av dig',
+      p: 'Vi svarar snabbt. Inget onödigt fram och tillbaka — bara ett rakt samtal om vad du behöver.',
+      intl: 'Verksamma internationellt',
+      formH: 'Skicka ett meddelande',
+      nameL: 'Ditt namn', nameP: 'Anna Svensson',
+      emailL: 'E-postadress', emailP: 'anna@foretag.se',
+      roleL: 'Jag är...', role1: 'Ett företag som söker personal', role2: 'Jobbsökande', role3: 'Annat',
+      msgL: 'Meddelande', msgP: 'Berätta vad du letar efter...',
+      send: 'Skicka meddelande →',
+    },
+  },
+  pl: {
+    nav: { jobs: 'Oferty pracy', clients: 'Dla firm', seekers: 'Dla kandydatów', about: 'O nas', contact: 'Kontakt' },
+    home: {
+      eyebrow: 'Międzynarodowy serwis rekrutacyjny',
+      h1a: 'Właściwi ludzie,', h1b: 'we właściwym czasie.',
+      sub: 'Foundryworks łączy firmy z wykwalifikowanymi specjalistami i pomaga ludziom znaleźć pracę, która im odpowiada — szybko i bez zbędnej biurokracji.',
+      btn1: 'Zobacz oferty pracy', btn2: 'Skontaktuj się',
+      stat1: 'Zrealizowanych rekrutacji', stat2: 'Firm klientów', stat3: 'Krajów', stat4: 'Lat doświadczenia',
+      whatLabel: 'Co robimy', whatH2: 'Rekrutacja, która działa\ndla obu stron.',
+      whatSub: 'Niezależnie od tego, czy chcesz rozwijać swój zespół, czy szukasz kolejnego kroku w karierze — jesteśmy tu, by to umożliwić.',
+      card1h: 'Dla firm', card1p: 'Przejmujemy cały proces rekrutacji od początku do końca — szybko i trafnie dobieramy ludzi do Twojej firmy.', card1a: 'Dowiedz się więcej →',
+      card2h: 'Dla kandydatów', card2p: 'Żadnych długich procesów ani zbędnych kroków. Działamy szybko i aktywnie szukamy dla Ciebie odpowiednich możliwości.', card2a: 'Dowiedz się więcej →',
+      card3h: 'Zasięg międzynarodowy', card3p: 'Działamy ponad granicami, zachowując osobiste podejście. Globalny zasięg, ludzki wymiar.', card3a: 'O nas →',
+      ctaH: 'Szukasz kolejnego pracownika?', ctaP: 'Skontaktuj się z nami — opowiedz o swoich potrzebach, a my zajmiemy się resztą.', ctaBtn: 'Skontaktuj się',
+      footer: 'Międzynarodowy serwis rekrutacyjny',
+    },
+    clients: {
+      eyebrow: 'Dla firm', h1: 'Dokładne dopasowanie\nza każdym razem.',
+      sub: 'Znajdowanie odpowiednich pracowników nie powinno spowalniać Twojego biznesu. Łączymy firmy z zmotywowanymi specjalistami — szybko i bez zbędnych komplikacji.',
+      h2a: 'Jak pracujemy',
+      p1: 'Poświęcamy czas na zrozumienie Twojej firmy, kultury organizacyjnej i rzeczywistych potrzeb kadrowych. Efekt: lepsze dopasowanie, sprawniejsze wdrożenie i ludzie, którzy naprawdę pasują do zespołu.',
+      p2: 'Od pierwszej rozmowy aż do finalizacji zatrudnienia — prowadzimy cały proces, żebyś Ty nie musiał.',
+      h2b: 'Dlaczego Foundryworks',
+      f1: 'Elastyczne rozwiązania dla potrzeb krótko- i długoterminowych',
+      f2: 'Staranna selekcja kandydatów — spotykasz tylko odpowiednie osoby',
+      f3: 'Szybka i sprawna obsługa bez kompromisów w kwestii jakości',
+      f4: 'Zaangażowany partner przez cały czas trwania procesu',
+      f5: 'Międzynarodowy zasięg z osobistym podejściem',
+      f6: 'Doświadczenie w szerokim spektrum branż',
+      ctaH: 'Szukasz kolejnego pracownika?', ctaP: 'Skontaktuj się i opowiedz nam o swoich potrzebach.', ctaBtn: 'Skontaktuj się →',
+    },
+    seekers: {
+      eyebrow: 'Dla kandydatów', h1: 'Twoja kolejna szansa\nzaczyna się tutaj.',
+      sub: 'Szukanie pracy nie musi być skomplikowane. Eliminujemy biurokrację i skupiamy się na tym, co ważne — żebyś szybko znalazł zatrudnienie.',
+      h2a: 'Czego się spodziewać',
+      p1: 'Traktujemy Cię jak człowieka, a nie tylko jak CV. Od pierwszego kontaktu działamy sprawnie. Żadnych długich procesów ani zbędnych kroków — tylko prosta droga do Twojej kolejnej pracy.',
+      h2b: 'Co oferujemy',
+      f1: 'Szybka odpowiedź i przejrzysty proces od pierwszego dnia',
+      f2: 'Osobiste wsparcie przez cały czas poszukiwania pracy',
+      f3: 'Oferty w szerokim zakresie branż i stanowisk',
+      f4: 'Możliwość pracy za granicą',
+      f5: 'Zespół, który naprawdę jest po Twojej stronie',
+      f6: 'Żadnej zbędnej papierkowej roboty ani opóźnień',
+      ctaH: 'Zrób pierwszy krok.', ctaP: 'Wyślij nam swoje dane lub przejrzyj oferty pracy — odezwiemy się wkrótce.',
+      btn1: 'Oferty pracy →', btn2: 'Skontaktuj się',
+    },
+    about: {
+      eyebrow: 'O nas', h1: 'Rekrutacja\ninaczej.',
+      sub: 'Zbudowana na prostym przekonaniu — znajdowanie właściwych ludzi powinno być proste, osobiste i szybkie.',
+      h2a: 'Kim jesteśmy',
+      p1: 'Foundryworks to działająca międzynarodowo agencja pracy i rekrutacji. Łączymy firmy z potrzebnym im talentem i pomagamy ludziom znaleźć pracę odpowiadającą ich kompetencjom i ambicjom.',
+      p2: 'Nie wierzymy w zbędną złożoność. Nasze podejście jest bezpośrednie, proces wydajny, a focus zawsze na ludziach.',
+      h2b: 'Co nami kieruje',
+      p3: 'Branża rekrutacyjna bywa bezosobowa. Uważamy, że nie musi taka być. Każda firma ma swoją kulturę, a każdy człowiek swoją historię. Bierzemy czas, by zrozumieć obie strony — i właśnie to robi różnicę.',
+      h2c: 'Doświadczenie jako fundament. Wyniki jako cel.',
+      p4: 'Nasz zespół ma wieloletnie praktyczne doświadczenie w rekrutacji w różnych branżach i na różnych rynkach. Tę wiedzę przekuwamy na trwałe rezultaty.',
+      f1: 'Działalność międzynarodowa na wielu rynkach',
+      f2: 'Głębokie doświadczenie w rekrutacji i pracy tymczasowej',
+      f3: 'Osobiste, bezpośrednie podejście do każdego procesu',
+      f4: 'Długoterminowe partnerstwa z klientami i kandydatami',
+      ctaH: 'Współpracujmy razem.', ctaP: 'Niezależnie czy jesteś firmą czy kandydatem — chętnie Cię wysłuchamy.', ctaBtn: 'Skontaktuj się →',
+    },
+    jobs: {
+      eyebrow: 'Oferty pracy', h1: 'Znajdź swoją kolejną\nszansę.',
+      sub: 'Przeglądaj nasze aktualne oferty pracy w różnych branżach i lokalizacjach.',
+      noH: 'Nowe oferty pojawią się wkrótce.',
+      noP: 'Aktualizujemy właśnie nasze ogłoszenia. Wyślij nam swoje dane, a skontaktujemy się z Tobą, gdy pojawi się odpowiednia oferta.',
+      noBtn: 'Wyślij CV →',
+    },
+    contact: {
+      eyebrow: 'Kontakt', h1: 'Porozmawiajmy.',
+      sub: 'Szukasz pracownika czy pracy — odezwij się, a zajmiemy się tym razem.',
+      h2: 'Skontaktuj się',
+      p: 'Odpowiadamy szybko. Żadnego zbędnego korespondowania — tylko bezpośrednia rozmowa o Twoich potrzebach.',
+      intl: 'Działamy międzynarodowo',
+      formH: 'Napisz wiadomość',
+      nameL: 'Twoje imię i nazwisko', nameP: 'Jan Kowalski',
+      emailL: 'Adres e-mail', emailP: 'jan@firma.pl',
+      roleL: 'Jestem...', role1: 'Firmą poszukującą pracownika', role2: 'Kandydatem', role3: 'Inne',
+      msgL: 'Wiadomość', msgP: 'Napisz, czego szukasz...',
+      send: 'Wyślij wiadomość →',
+    },
+  },
+  fr: {
+    nav: { jobs: 'Offres d\'emploi', clients: 'Pour les entreprises', seekers: 'Pour les candidats', about: 'Qui sommes-nous', contact: 'Contact' },
+    home: {
+      eyebrow: 'Recrutement et intérim international',
+      h1a: 'Les bonnes personnes,', h1b: 'au bon moment.',
+      sub: 'Foundryworks met en relation les entreprises avec des professionnels qualifiés et aide les personnes à trouver un emploi qui leur correspond — rapidement et sans bureaucratie inutile.',
+      btn1: 'Voir les offres d\'emploi', btn2: 'Nous contacter',
+      stat1: 'Placements réalisés', stat2: 'Entreprises clientes', stat3: 'Pays', stat4: 'Ans d\'expérience',
+      whatLabel: 'Ce que nous faisons', whatH2: 'Un recrutement qui fonctionne\npour les deux parties.',
+      whatSub: 'Que vous soyez une entreprise qui veut grandir ou un professionnel prêt pour la prochaine étape, nous sommes là pour le concrétiser.',
+      card1h: 'Pour les entreprises', card1p: 'Nous gérons l\'intégralité du processus de recrutement — nous trouvons les bonnes personnes pour votre entreprise, rapidement et efficacement.', card1a: 'En savoir plus →',
+      card2h: 'Pour les candidats', card2p: 'Pas de processus interminables ni d\'étapes inutiles. Nous agissons vite et cherchons activement des opportunités adaptées à votre profil.', card2a: 'En savoir plus →',
+      card3h: 'Portée internationale', card3p: 'Nous opérons au-delà des frontières tout en conservant une approche personnelle. Présence mondiale, dimension humaine.', card3a: 'Qui sommes-nous →',
+      ctaH: 'Prêt à trouver votre prochaine recrue ?', ctaP: 'Parlez-nous de vos besoins. Nous nous chargeons du reste.', ctaBtn: 'Nous contacter',
+      footer: 'Recrutement et intérim international',
+    },
+    clients: {
+      eyebrow: 'Pour les entreprises', h1: 'Le profil idéal,\nà chaque fois.',
+      sub: 'Trouver des collaborateurs fiables ne devrait pas freiner votre activité. Nous mettons en relation les entreprises avec des professionnels motivés — avec rapidité et sans complications inutiles.',
+      h2a: 'Notre façon de travailler',
+      p1: 'Nous prenons le temps de comprendre votre entreprise, votre culture et ce dont vous avez réellement besoin dans un nouveau recrutement. Résultat : une meilleure adéquation, une intégration plus fluide et des personnes qui s\'inscrivent vraiment dans votre équipe.',
+      p2: 'Du premier entretien jusqu\'à la prise de poste, nous gérons l\'ensemble du processus pour que vous n\'ayez pas à le faire.',
+      h2b: 'Pourquoi Foundryworks',
+      f1: 'Solutions flexibles pour les besoins à court et long terme',
+      f2: 'Sélection rigoureuse des candidats — vous ne rencontrez que les bons profils',
+      f3: 'Service réactif et efficace sans compromis sur la qualité',
+      f4: 'Un partenaire dédié tout au long du processus',
+      f5: 'Portée internationale avec une touche personnelle',
+      f6: 'Expérience dans une grande variété de secteurs',
+      ctaH: 'Prêt à trouver votre prochaine recrue ?', ctaP: 'Contactez-nous et parlez-nous de vos besoins.', ctaBtn: 'Nous contacter →',
+    },
+    seekers: {
+      eyebrow: 'Pour les candidats', h1: 'Votre prochaine opportunité\ncommence ici.',
+      sub: 'Chercher un emploi ne devrait pas être compliqué. Nous éliminons la bureaucratie et nous concentrons sur l\'essentiel — vous faire travailler rapidement.',
+      h2a: 'À quoi s\'attendre',
+      p1: 'Nous vous voyons comme une personne, pas seulement comme un CV. Dès le premier contact, nous agissons rapidement. Pas de processus interminables ni d\'étapes inutiles — juste un chemin direct vers votre prochain emploi.',
+      h2b: 'Ce que nous offrons',
+      f1: 'Réponse rapide et processus clair dès le premier jour',
+      f2: 'Accompagnement personnalisé tout au long de votre recherche',
+      f3: 'Opportunités dans une large gamme de secteurs et de métiers',
+      f4: 'Placements internationaux disponibles',
+      f5: 'Une équipe genuinement de votre côté',
+      f6: 'Pas de paperasse inutile ni de délais',
+      ctaH: 'Faites le premier pas.', ctaP: 'Envoyez-nous vos coordonnées ou consultez nos offres — nous vous contacterons rapidement.',
+      btn1: 'Offres d\'emploi →', btn2: 'Nous contacter',
+    },
+    about: {
+      eyebrow: 'Qui sommes-nous', h1: 'Le recrutement\nautrement.',
+      sub: 'Fondée sur une conviction simple — trouver les bonnes personnes devrait être direct, personnel et rapide.',
+      h2a: 'Qui nous sommes',
+      p1: 'Foundryworks est une société de recrutement et d\'intérim opérant à l\'international. Nous mettons en relation les entreprises avec les talents dont elles ont besoin et aidons les personnes à trouver un emploi en adéquation avec leurs compétences et leurs ambitions.',
+      p2: 'Nous ne croyons pas en la complexité inutile. Notre approche est directe, notre processus efficace, et notre attention est toujours portée sur les personnes.',
+      h2b: 'Ce qui nous anime',
+      p3: 'Le secteur du recrutement peut sembler impersonnel. Nous pensons qu\'il ne devrait pas l\'être. Chaque entreprise a sa propre culture, chaque personne sa propre histoire. Nous prenons le temps de comprendre les deux — c\'est ce qui fait la différence.',
+      h2c: 'L\'expérience comme socle. Les résultats comme boussole.',
+      p4: 'Notre équipe possède des années d\'expérience pratique en recrutement, dans des secteurs variés et sur différents marchés. Nous mettons ce savoir-faire au service de résultats durables.',
+      f1: 'Activité internationale sur plusieurs marchés',
+      f2: 'Expertise approfondie en recrutement et intérim',
+      f3: 'Approche personnelle et directe pour chaque placement',
+      f4: 'Partenariats à long terme avec les clients et les candidats',
+      ctaH: 'Travaillons ensemble.', ctaP: 'Que vous soyez une entreprise ou un candidat, nous serions ravis d\'échanger avec vous.', ctaBtn: 'Nous contacter →',
+    },
+    jobs: {
+      eyebrow: 'Offres d\'emploi', h1: 'Trouvez votre prochaine\nopportunité.',
+      sub: 'Consultez nos offres actuelles dans une grande variété de secteurs et de localisations.',
+      noH: 'De nouvelles offres arrivent bientôt.',
+      noP: 'Nous mettons actuellement nos annonces à jour. Envoyez-nous vos coordonnées et nous vous contacterons dès qu\'une opportunité se présente.',
+      noBtn: 'Envoyer mon CV →',
+    },
+    contact: {
+      eyebrow: 'Contact', h1: 'Parlons-en.',
+      sub: 'Que vous cherchiez à recruter ou à trouver un emploi — contactez-nous et nous nous en occupons.',
+      h2: 'Prenez contact',
+      p: 'Nous répondons rapidement. Pas d\'allers-retours inutiles — juste une conversation directe sur vos besoins.',
+      intl: 'Présents à l\'international',
+      formH: 'Envoyer un message',
+      nameL: 'Votre nom', nameP: 'Marie Dupont',
+      emailL: 'Adresse e-mail', emailP: 'marie@entreprise.fr',
+      roleL: 'Je suis...', role1: 'Une entreprise qui recrute', role2: 'Un candidat', role3: 'Autre',
+      msgL: 'Message', msgP: 'Dites-nous ce que vous recherchez...',
+      send: 'Envoyer le message →',
+    },
+  },
+};
+
+let currentLang = 'en';
+let currentPage = 'home';
+
+function toggleLangMenu() {
+  document.getElementById('langDropdown').classList.toggle('open');
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.lang-selector')) {
+    document.getElementById('langDropdown').classList.remove('open');
+  }
+});
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('langDropdown').classList.remove('open');
+  const l = languages[lang];
+  document.getElementById('langBtn').textContent = `🌐 ${lang.toUpperCase()} ▾`;
+  document.body.style.direction = l.dir;
+  renderNav();
+  renderPage(currentPage);
+  buildLangDropdown();
+}
+
+function buildLangDropdown() {
+  const dd = document.getElementById('langDropdown');
+  dd.innerHTML = Object.entries(languages).map(function(entry){
+    var code = entry[0]; var l = entry[1];
+    return '<div class="lang-option ' + (code === currentLang ? 'active' : '') + '" onclick="setLang(\'' + code + '\')">' + l.flag + ' ' + l.label + '</div>';
+  }).join('');
+}
+
+function renderNav() {
+  const nav = t[currentLang].nav;
+  document.getElementById('navLinks').innerHTML = `
+    <li class="hide-mobile"><a onclick="showPage('jobs')">${nav.jobs}</a></li>
+    <li class="hide-mobile"><a onclick="showPage('clients')">${nav.clients}</a></li>
+    <li class="hide-mobile"><a onclick="showPage('seekers')">${nav.seekers}</a></li>
+    <li class="hide-mobile"><a onclick="showPage('about')">${nav.about}</a></li>
+    <li><a class="cta-nav" onclick="showPage('contact')">${nav.contact}</a></li>
+  `;
+}
+
+function showPage(page) {
+  currentPage = page;
+  renderPage(page);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function footer(lang) {
+  const txt = t[lang].home.footer;
+  return `<footer>
+    <div class="footer-logo">Foundry<span>works</span></div>
+    <div>${txt}</div>
+    <div><a href="mailto:hello@foundryworks.com">hello@foundryworks.com</a></div>
+    <div>© 2025 Foundryworks</div>
+  </footer>`;
+}
+
+function renderPage(page) {
+  const lang = currentLang;
+  const nav = t[lang].nav;
+  let html = '';
+
+  if (page === 'home') {
+    const h = t[lang].home;
+    html = `
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-eyebrow">${h.eyebrow}</span>
+        <h1>${h.h1a}<br><em>${h.h1b}</em></h1>
+        <p>${h.sub}</p>
+        <div class="hero-btns">
+          <a class="btn-primary" onclick="showPage('jobs')">${h.btn1}</a>
+          <a class="btn-secondary" onclick="showPage('contact')">${h.btn2}</a>
+        </div>
+      </div>
+    </section>
+    <div class="stats">
+      <div class="stat"><div class="stat-number">500<span>+</span></div><div class="stat-label">${h.stat1}</div></div>
+      <div class="stat"><div class="stat-number">80<span>+</span></div><div class="stat-label">${h.stat2}</div></div>
+      <div class="stat"><div class="stat-number">15<span>+</span></div><div class="stat-label">${h.stat3}</div></div>
+      <div class="stat"><div class="stat-number">10<span>+</span></div><div class="stat-label">${h.stat4}</div></div>
+    </div>
+    <div class="section">
+      <div class="section-label">${h.whatLabel}</div>
+      <h2>${h.whatH2.replace('\n','<br>')}</h2>
+      <p class="section-intro">${h.whatSub}</p>
+      <div class="cards">
+        <div class="card"><div class="card-icon">🏢</div><h3>${h.card1h}</h3><p>${h.card1p}</p><a class="card-link" onclick="showPage('clients')">${h.card1a}</a></div>
+        <div class="card"><div class="card-icon">👤</div><h3>${h.card2h}</h3><p>${h.card2p}</p><a class="card-link" onclick="showPage('seekers')">${h.card2a}</a></div>
+        <div class="card"><div class="card-icon">🌍</div><h3>${h.card3h}</h3><p>${h.card3p}</p><a class="card-link" onclick="showPage('about')">${h.card3a}</a></div>
+      </div>
+    </div>
+    <div class="cta-band">
+      <h2>${h.ctaH}</h2><p>${h.ctaP}</p>
+      <a class="btn-primary" onclick="showPage('contact')">${h.ctaBtn}</a>
+    </div>
+    ${footer(lang)}`;
+  }
+
+  else if (page === 'clients') {
+    const c = t[lang].clients;
+    html = `
+    <div class="page-hero"><div class="page-hero-content">
+      <span class="eyebrow">${c.eyebrow}</span>
+      <h1>${c.h1.replace('\n','<br>')}</h1>
+      <p>${c.sub}</p>
+    </div></div>
+    <div class="content-section">
+      <div class="content-block"><h2>${c.h2a}</h2><p>${c.p1}</p><p>${c.p2}</p></div>
+      <div class="content-block"><h2>${c.h2b}</h2>
+        <ul class="feature-list">
+          <li>${c.f1}</li><li>${c.f2}</li><li>${c.f3}</li><li>${c.f4}</li><li>${c.f5}</li><li>${c.f6}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cta-band"><h2>${c.ctaH}</h2><p>${c.ctaP}</p><a class="btn-primary" onclick="showPage('contact')">${c.ctaBtn}</a></div>
+    ${footer(lang)}`;
+  }
+
+  else if (page === 'seekers') {
+    const s = t[lang].seekers;
+    html = `
+    <div class="page-hero"><div class="page-hero-content">
+      <span class="eyebrow">${s.eyebrow}</span>
+      <h1>${s.h1.replace('\n','<br>')}</h1>
+      <p>${s.sub}</p>
+    </div></div>
+    <div class="content-section">
+      <div class="content-block"><h2>${s.h2a}</h2><p>${s.p1}</p></div>
+      <div class="content-block"><h2>${s.h2b}</h2>
+        <ul class="feature-list">
+          <li>${s.f1}</li><li>${s.f2}</li><li>${s.f3}</li><li>${s.f4}</li><li>${s.f5}</li><li>${s.f6}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cta-band"><h2>${s.ctaH}</h2><p>${s.ctaP}</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a class="btn-primary" onclick="showPage('jobs')">${s.btn1}</a>
+        <a class="btn-secondary" onclick="showPage('contact')">${s.btn2}</a>
+      </div>
+    </div>
+    ${footer(lang)}`;
+  }
+
+  else if (page === 'about') {
+    const a = t[lang].about;
+    html = `
+    <div class="page-hero"><div class="page-hero-content">
+      <span class="eyebrow">${a.eyebrow}</span>
+      <h1>${a.h1.replace('\n','<br>')}</h1>
+      <p>${a.sub}</p>
+    </div></div>
+    <div class="content-section">
+      <div class="content-block"><h2>${a.h2a}</h2><p>${a.p1}</p><p>${a.p2}</p></div>
+      <div class="content-block"><h2>${a.h2b}</h2><p>${a.p3}</p></div>
+      <div class="content-block"><h2>${a.h2c}</h2><p>${a.p4}</p>
+        <ul class="feature-list">
+          <li>${a.f1}</li><li>${a.f2}</li><li>${a.f3}</li><li>${a.f4}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cta-band"><h2>${a.ctaH}</h2><p>${a.ctaP}</p><a class="btn-primary" onclick="showPage('contact')">${a.ctaBtn}</a></div>
+    ${footer(lang)}`;
+  }
+
+  else if (page === 'jobs') {
+    const j = t[lang].jobs;
+    html = `
+    <div class="page-hero"><div class="page-hero-content">
+      <span class="eyebrow">${j.eyebrow}</span>
+      <h1>${j.h1.replace('\n','<br>')}</h1>
+      <p>${j.sub}</p>
+    </div></div>
+    <div class="content-section">
+      <div class="search-bar">
+        <div class="form-group">
+          <label>Sektori</label>
+          <select id="filterSector" onchange="filterJobs()">
+            <option value="">Kaikki sektorit</option>
+            ${JOB_DATA.sectors.map(function(s){ return '<option value="' + s.id + '">' + s.emoji + ' ' + s.name + '</option>'; }).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tehtävänimike</label>
+          <select id="filterRole" onchange="filterJobs()">
+            <option value="">Kaikki tehtävät</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Sijainti</label>
+          <input type="text" id="filterLocation" placeholder="esim. Helsinki" oninput="filterJobs()">
+        </div>
+        <button class="btn-search" onclick="filterJobs()">Hae</button>
+      </div>
+      <button class="btn-clear" onclick="clearFilters()">Tyhjennä haku</button>
+      <div class="results-count" id="resultsCount"></div>
+      <div id="jobResults"></div>
+    </div>
+    ${footer(lang)}`;
+    setTimeout(function() { initJobSearch(); }, 0);
+  }
+
+  else if (page === 'contact') {
+    const c = t[lang].contact;
+    html = `
+    <div class="page-hero"><div class="page-hero-content">
+      <span class="eyebrow">${c.eyebrow}</span>
+      <h1>${c.h1}</h1>
+      <p>${c.sub}</p>
+    </div></div>
+    <div class="content-section">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>${c.h2}</h2>
+          <p>${c.p}</p>
+          <div class="contact-item"><span>✉️</span><a href="mailto:hello@foundryworks.com">hello@foundryworks.com</a></div>
+          <div class="contact-item"><span>📞</span><a href="tel:+358000000000">+358 00 000 0000</a></div>
+          <div class="contact-item"><span>🌍</span><span>${c.intl}</span></div>
+        </div>
+        <div class="contact-form">
+          <h3>${c.formH}</h3>
+          <div class="form-group"><label>${c.nameL}</label><input type="text" placeholder="${c.nameP}"></div>
+          <div class="form-group"><label>${c.emailL}</label><input type="email" placeholder="${c.emailP}"></div>
+          <div class="form-group"><label>${c.roleL}</label>
+            <select><option>${c.role1}</option><option>${c.role2}</option><option>${c.role3}</option></select>
+          </div>
+          <div class="form-group"><label>${c.msgL}</label><textarea placeholder="${c.msgP}"></textarea></div>
+
+```
+      <button class="btn-submit">${c.send}</button>
+    </div>
+  </div>
+</div>
+${footer(lang)}`;
+```
+
+}
+
+const appDiv = document.getElementById(‘app’);
+appDiv.innerHTML = `<div class="page active">${html}</div>`;
+}
+
+// ── JOB SEARCH ──────────────────────────────────────────────────
+function initJobSearch() {
+const sectorSel = document.getElementById(‘filterSector’);
+if (sectorSel) {
+sectorSel.addEventListener(‘change’, function() {
+updateFilterRoleDropdown();
+filterJobs();
+});
+}
+filterJobs();
+}
+
+function updateFilterRoleDropdown() {
+const sectorId = document.getElementById(‘filterSector’).value;
+const roleSel = document.getElementById(‘filterRole’);
+if (!roleSel) return;
+const sector = JOB_DATA.sectors.find(function(s) { return s.id === sectorId; });
+if (!sector) {
+roleSel.innerHTML = ‘<option value="">Kaikki tehtävät</option>’;
+} else {
+roleSel.innerHTML = ‘<option value="">Kaikki tehtävät</option>’ +
+sector.roles.map(function(r) { return ‘<option value="' + r + '">’ + r + ‘</option>’; }).join(’’);
+}
+}
+
+function filterJobs() {
+const sectorVal = (document.getElementById(‘filterSector’) || {}).value || ‘’;
+const roleVal = ((document.getElementById(‘filterRole’) || {}).value || ‘’).toLowerCase();
+const locVal = ((document.getElementById(‘filterLocation’) || {}).value || ‘’).toLowerCase();
+
+let filtered = jobs.filter(function(j) {
+const matchSector = !sectorVal || (j.sectorId === sectorVal);
+const matchRole = !roleVal || j.title.toLowerCase().includes(roleVal);
+const matchLoc = !locVal || j.location.toLowerCase().includes(locVal);
+return matchSector && matchRole && matchLoc;
+});
+
+renderJobResults(filtered);
+}
+
+function clearFilters() {
+var s = document.getElementById(‘filterSector’);
+var r = document.getElementById(‘filterRole’);
+var l = document.getElementById(‘filterLocation’);
+if (s) s.value = ‘’;
+if (r) r.innerHTML = ‘<option value="">Kaikki tehtävät</option>’;
+if (l) l.value = ‘’;
+filterJobs();
+}
+
+function renderJobResults(list) {
+const container = document.getElementById(‘jobResults’);
+const countEl = document.getElementById(‘resultsCount’);
+if (!container) return;
+
+if (countEl) {
+countEl.textContent = list.length > 0
+? list.length + ’ ilmoitusta löytyi’
+: ‘’;
+}
+
+if (list.length === 0) {
+container.innerHTML = ‘<div class="no-jobs"><h3>Ei tuloksia.</h3><p>Kokeile eri hakuehtoja tai <a style="color:var(--orange);cursor:pointer;" onclick="clearFilters()">tyhjennä haku</a>.</p></div>’;
+return;
+}
+
+container.innerHTML = list.map(function(jb) {
+return ‘<div class="job-card-pub">’ +
+‘<div class="job-card-pub-header">’ +
+‘<h3>’ + jb.title + ‘</h3>’ +
+‘<span class="job-type-badge">’ + jb.type + ‘</span>’ +
+‘</div>’ +
+‘<div class="job-meta-row">’ +
+‘<span class="job-meta-tag">📍 ’ + jb.location + ‘</span>’ +
+(jb.sector ? ‘<span class="sector-badge">’ + jb.sector + ‘</span>’ : ‘’) +
+(jb.level ? ‘<span class="level-badge">’ + jb.level + ‘</span>’ : ‘’) +
+(jb.deadline ? ‘<span class="job-meta-tag">⏳ ’ + jb.deadline + ‘</span>’ : ‘’) +
+‘</div>’ +
+‘<p class="job-desc">’ + jb.description + ‘</p>’ +
+‘<a class="card-link" onclick="showPage(\'contact\')" style="display:inline-block;">Hae paikkaa →</a>’ +
+‘</div>’;
+}).join(’’);
+}
+// ────────────────────────────────────────────────────────────────
+
+// ── JOB DATA ────────────────────────────────────────────────────
+const JOB_DATA = {
+experience_levels: [
+{ id: “trainee”, label: “Harjoittelija” },
+{ id: “junior”, label: “Junior” },
+{ id: “experienced”, label: “Kokenut” },
+{ id: “senior”, label: “Senior” },
+{ id: “expert”, label: “Asiantuntija” },
+{ id: “supervisor”, label: “Työnjohtaja / Esimies” }
+],
+sectors: [
+{ id: “rakennusala”, name: “Rakennusala”, emoji: “🏗️”, roles: [“Maanrakennustyöntekijä”,“Kaivinkoneenkuljettaja”,“Pyöräkuormaajankuljettaja”,“Tiehöylänkuljettaja”,“Räjäyttäjä / Louhintatyöntekijä”,“Betonityöntekijä”,“Raudoittaja”,“Elementtiasentaja”,“Teräsrakentaja / Teräsmontaattori”,“Kirvesmies”,“Muurari”,“Telineasentaja”,“Sähköasentaja”,“LVI-asentaja”,“Automaatioasentaja”,“Sprinkleri-asentaja”,“Kaukolämpöasentaja”,“Rappari”,“Maalari”,“Lattiamies”,“Vedeneristäjä”,“Kattomies / Pellittäjä”,“Purkutyöntekijä”,“Rakennusapumies”,“Rakennussiivooja”,“Vastaava mestari”,“Työnjohtaja (rakennusala)”,“Rakennusinsinööri”,“Työturvallisuuspäällikkö (HSEQ)”] },
+{ id: “teollisuus”, name: “Teollisuus & Tuotanto”, emoji: “🏭”, roles: [“Hitsaaja (MIG/MAG)”,“Hitsaaja (TIG)”,“Hitsaaja (puikko)”,“Levyseppä-hitsaaja”,“CNC-operaattori / Koneistaja”,“Särmääjä”,“Putkistomontaattori”,“Kokoonpanija”,“Tuotantotyöntekijä”,“Pakkaustyöntekijä”,“Operaattori (prosessiteollisuus)”,“Elintarviketyöntekijä”,“Puutyöntekijä / Sahatyöntekijä”,“Kunnossapitoasentaja”,“Mekaaninen kunnossapitäjä”,“Sähkökunnossapitäjä”,“Laaduntarkastaja”,“Varastotyöntekijä (teollisuus)”,“Tuotantopäällikkö”,“Vuoromestari / Tuotannonjohtaja”,“Lean / Prosessikehittäjä”,“Teollisuusinsinööri”] },
+{ id: “laivanrakennus”, name: “Laivanrakennus & Offshore”, emoji: “⚓”, roles: [“Laivanrakentaja / Rungonrakentaja”,“Laivalevyseppä-hitsaaja”,“Laivaputkistomontaattori”,“Laivahitsaaja”,“Teräsrakentaja (laivateollisuus)”,“Laivakoneistaja”,“Laivasähköasentaja”,“Laiva-automaatioasentaja”,“Putkistohitsaaja (offshore)”,“Eristäjä (laiva)”,“Pintakäsittelijä (laiva)”,“Laivan varusteluasentaja”,“Nosturinkuljettaja (telakka)”,“Telakoitsija / Hinaajankuljettaja”,“Laivarakennusinsinööri”,“Telakkatyönjohtaja”,“Projekti-insinööri (laiva)”] },
+{ id: “metalliteollisuus”, name: “Metalliteollisuus”, emoji: “⚙️”, roles: [“Valutyöntekijä”,“Taontaoperaattori”,“Pinnoittaja / Galvanoija”,“Hiontatyöntekijä”,“Lämpökäsittelijä”,“Alumiinirakentaja”,“Työkaluntekijä / Muotintekijä”,“Mittausteknikko (CMM)”,“Painelaiteasentaja”,“NDT-tarkastaja”,“Hitsausinsinööri / -koordinaattori”,“Metallurgisti”,“Tuotantoinsinööri (metalli)”,“Ostaja / Hankkija (metalli)”] },
+{ id: “horeca”, name: “HoReCa”, emoji: “🍽️”, roles: [“Keittiöpäällikkö / Head Chef”,“Vuoropäällikkö (keittiö)”,“Kokki”,“Commis Chef / Apukokki”,“Pastry Chef / Kondiittori”,“Kylmäkkö”,“Keittiöapulainen / Astianpesijä”,“Catering-työntekijä”,“Ravintolapäällikkö”,“Vuoropäällikkö (sali)”,“Tarjoilija”,“Baarimestari / Bariista”,“Hovimestari”,“Hotellinjohtaja”,“Vastaanottovirkailija”,“Concierge”,“Siivouspalveluvastaava (hotelli)”,“Huoneenhoitaja / Room Attendant”,“Kylpylä- / Spa-työntekijä”,“Tapahtumapäällikkö”,“Cateringkoordinaattori”] },
+{ id: “logistiikka”, name: “Kuljetus, Logistiikka & Varasto”, emoji: “🚚”, roles: [“Kuorma-autonkuljettaja (CE)”,“Kuorma-autonkuljettaja (C)”,“Säiliöautonkuljettaja”,“Erikoiskuljetuksen kuljettaja”,“Jakelukuljettaja (B/BE)”,“Linja-autonkuljettaja (D)”,“Varastonhoitaja”,“Varastotyöntekijä / Keräilijä”,“Trukinkuljettaja (VNA/reach)”,“Terminaalityöntekijä”,“Satamatyöntekijä”,“Huolitsija”,“Kuljetussuunnittelija”,“Logistiikkakoordinaattori”,“Varastopäällikkö”,“Kuljetuspäällikkö”,“Hankintakoordinaattori (logistiikka)”,“Tullaaja / Tulli-ilmoittaja”] }
+]
+};
+
+function initAdminDropdowns() {
+const sectorSel = document.getElementById(‘jobSector’);
+const levelSel = document.getElementById(‘jobLevel’);
+if (!sectorSel) return;
+sectorSel.innerHTML = ‘<option value="">Valitse sektori…</option>’ +
+JOB_DATA.sectors.map(function(s){ return ‘<option value="' + s.id + '">’ + s.emoji + ’ ’ + s.name + ‘</option>’; }).join(’’);
+levelSel.innerHTML = ‘<option value="">Kaikki tasot</option>’ +
+JOB_DATA.experience_levels.map(function(l){ return ‘<option value="' + l.id + '">’ + l.label + ‘</option>’; }).join(’’);
+}
+
+function updateRoleDropdown() {
+const sectorId = document.getElementById(‘jobSector’).value;
+const roleSel = document.getElementById(‘jobTitle’);
+const sector = JOB_DATA.sectors.find(function(s) { return s.id === sectorId; });
+if (!sector) {
+roleSel.innerHTML = ‘<option value="">Valitse ensin sektori…</option>’;
+return;
+}
+roleSel.innerHTML = ‘<option value="">Valitse tehtävänimike…</option>’ +
+sector.roles.map(function(r) { return ‘<option value="' + r + '">’ + r + ‘</option>’; }).join(’’);
+}
+
+// ── ADMIN ──────────────────────────────────────────────────────
+const ADMIN_PW = ‘foundry2025’;
+// Safe storage - works even if localStorage is blocked (iOS private mode)
+let jobs = [];
+let generatedDescription = ‘’;
+
+function loadJobs() {
+try {
+jobs = JSON.parse(localStorage.getItem(‘fw_jobs’) || ‘[]’);
+} catch(e) {
+jobs = [];
+}
+}
+
+function saveJobs() {
+try {
+localStorage.setItem(‘fw_jobs’, JSON.stringify(jobs));
+} catch(e) {
+// localStorage blocked - jobs stay in memory only
+}
+}
+
+loadJobs();
+
+function openAdmin() {
+document.getElementById(‘adminOverlay’).classList.remove(‘hidden’);
+document.getElementById(‘adminPwInput’).focus();
+}
+
+function showAdminPanel() {
+document.getElementById(‘adminLogin’).classList.add(‘hidden’);
+document.getElementById(‘adminPanel’).classList.remove(‘hidden’);
+initAdminDropdowns();
+renderAdminJobList();
+updateJobCount();
+}
+
+function closeAdmin() {
+document.getElementById(‘adminOverlay’).classList.add(‘hidden’);
+document.getElementById(‘adminLogin’).classList.remove(‘hidden’);
+document.getElementById(‘adminPanel’).classList.add(‘hidden’);
+document.getElementById(‘adminPwInput’).value = ‘’;
+resetForm();
+}
+
+function checkAdminPw() {
+const pw = document.getElementById(‘adminPwInput’).value;
+if (pw === ADMIN_PW) {
+showAdminPanel();
+} else {
+const err = document.getElementById(‘adminError’);
+err.style.display = ‘block’;
+setTimeout(function(){ err.style.display = ‘none’; }, 2500);
+}
+}
+
+function resetForm() {
+[‘jobTitle’,‘jobLocation’,‘jobIndustry’,‘jobDesc’].forEach(function(id){
+var el = document.getElementById(id);
+if (el) el.value = ‘’;
+});
+document.getElementById(‘jobType’).selectedIndex = 0;
+}
+
+// Generate function removed - using manual input
+
+function saveJob() {
+const title = document.getElementById(‘jobTitle’).value.trim();
+const location = document.getElementById(‘jobLocation’).value.trim();
+const type = document.getElementById(‘jobType’).value;
+const description = document.getElementById(‘jobDesc’).value.trim();
+
+if (!title || !location || !description) {
+alert(‘Täytä tehtävänimike, sijainti ja kuvaus.’);
+return;
+}
+
+const job = {
+id: Date.now(),
+title,
+location,
+type,
+description,
+date: new Date().toLocaleDateString(‘fi-FI’)
+};
+
+jobs.unshift(job);
+saveJobs();
+renderAdminJobList();
+updateJobCount();
+resetForm();
+renderPage(currentPage);
+}
+
+function deleteJob(id) {
+if (!confirm(‘Poistetaanko ilmoitus?’)) return;
+jobs = jobs.filter(function(j){ return j.id !== id; });
+saveJobs();
+renderAdminJobList();
+updateJobCount();
+renderPage(currentPage);
+}
+
+function updateJobCount() {
+const el = document.getElementById(‘jobCount’);
+if (el) el.textContent = jobs.length;
+}
+
+function renderAdminJobList() {
+const list = document.getElementById(‘adminJobList’);
+if (!list) return;
+if (jobs.length === 0) {
+list.innerHTML = ‘<p style="color:var(--text-muted);font-size:0.9rem;">Ei ilmoituksia vielä.</p>’;
+return;
+}
+list.innerHTML = jobs.map(function(j){
+return ‘<div class="admin-job-item">’ +
+‘<div>’ +
+‘<h4>’ + j.title + ‘</h4>’ +
+‘<p>’ + (j.sector || ‘’) + ’ · 📍 ’ + j.location + ’ · ’ + j.type + (j.level ? ’ · ’ + j.level : ‘’) + ’ · Lisätty ’ + j.date + ‘</p>’ +
+‘</div>’ +
+‘<button class="btn-delete" onclick="deleteJob(' + j.id + ')">Poista</button>’ +
+‘</div>’;
+}).join(’’);
+}
+// ──────────────────────────────────────────────────────────────
+
+// Init
+try {
+buildLangDropdown();
+renderNav();
+renderPage(‘home’);
+} catch(e) {
+console.error(‘Init error:’, e);
+}
+</script>
+
+<!-- ADMIN OVERLAY -->
+
+<div class="admin-overlay hidden" id="adminOverlay">
+  <div class="admin-login" id="adminLogin">
+    <h2>🔒 Admin</h2>
+    <p>Foundryworks sisäinen hallinta</p>
+    <input type="password" id="adminPwInput" placeholder="Salasana" onkeydown="if(event.key==='Enter')checkAdminPw()">
+    <div class="admin-error" id="adminError">Väärä salasana</div>
+    <button class="btn-primary" onclick="checkAdminPw()" style="width:100%">Kirjaudu sisään</button>
+  </div>
+  <div class="admin-panel hidden" id="adminPanel">
+    <div class="admin-panel-header">
+      <span>✦ Työpaikkailmoitukset</span>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-form">
+      <div class="admin-grid">
+        <div class="form-group">
+          <label>Sektori *</label>
+          <select id="jobSector" onchange="updateRoleDropdown()">
+            <option value="">Valitse sektori...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tehtävänimike *</label>
+          <select id="jobTitle">
+            <option value="">Valitse ensin sektori...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Sijainti *</label>
+          <input type="text" id="jobLocation" placeholder="esim. Helsinki, Tallinna, Berlin">
+        </div>
+        <div class="form-group">
+          <label>Kokemusaste</label>
+          <select id="jobLevel">
+            <option value="">Kaikki tasot</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Työaika *</label>
+          <select id="jobType">
+            <option value="Full-time">Kokoaikainen</option>
+            <option value="Part-time">Osa-aikainen</option>
+            <option value="Temporary">Määräaikainen</option>
+            <option value="Seasonal">Kausiluonteinen</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Hakuaika</label>
+          <input type="text" id="jobDeadline" placeholder="esim. 31.12.2025 tai Avoin">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Ilmoituksen kuvaus *</label>
+        <textarea id="jobDesc" placeholder="Kirjoita lyhyt kuvaus tehtävästä, vaatimuksista ja siitä miksi tämä on hyvä paikka..."></textarea>
+      </div>
+      <div class="admin-actions">
+        <button class="btn-save-job" id="btnSave" onclick="saveJob()" style="display:inline-block;">Tallenna ilmoitus →</button>
+      </div>
+    </div>
+    <div class="admin-job-list">
+      <h3>Julkaistut ilmoitukset <span class="badge-count" id="jobCount">0</span></h3>
+      <div id="adminJobList"></div>
+    </div>
+  </div>
+</div>
+<button class="admin-trigger" onclick="openAdmin()" title="Admin">⚙</button>
+
+</body>
+</html>
