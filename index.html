@@ -1041,9 +1041,10 @@ function setLang(lang) {
 
 function buildLangDropdown() {
   const dd = document.getElementById('langDropdown');
-  dd.innerHTML = Object.entries(languages).map(([code, l]) =>
-    `<div class="lang-option ${code === currentLang ? 'active' : ''}" onclick="setLang('${code}')">${l.flag} ${l.label}</div>`
-  ).join('');
+  dd.innerHTML = Object.entries(languages).map(function(entry){
+    var code = entry[0]; var l = entry[1];
+    return '<div class="lang-option ' + (code === currentLang ? 'active' : '') + '" onclick="setLang(\'' + code + '\')">' + l.flag + ' ' + l.label + '</div>';
+  }).join('');
 }
 
 function renderNav() {
@@ -1195,7 +1196,7 @@ function renderPage(page) {
           <label>Sektori</label>
           <select id="filterSector" onchange="filterJobs()">
             <option value="">Kaikki sektorit</option>
-            ${JOB_DATA.sectors.map(s => '<option value="' + s.id + '">' + s.emoji + ' ' + s.name + '</option>').join('')}
+            ${JOB_DATA.sectors.map(function(s){ return '<option value="' + s.id + '">' + s.emoji + ' ' + s.name + '</option>'; }).join('')}
           </select>
         </div>
         <div class="form-group">
@@ -1368,9 +1369,9 @@ const sectorSel = document.getElementById(‘jobSector’);
 const levelSel = document.getElementById(‘jobLevel’);
 if (!sectorSel) return;
 sectorSel.innerHTML = ‘<option value="">Valitse sektori…</option>’ +
-JOB_DATA.sectors.map(s => ‘<option value="' + s.id + '">’ + s.emoji + ’ ’ + s.name + ‘</option>’).join(’’);
+JOB_DATA.sectors.map(function(s){ return ‘<option value="' + s.id + '">’ + s.emoji + ’ ’ + s.name + ‘</option>’; }).join(’’);
 levelSel.innerHTML = ‘<option value="">Kaikki tasot</option>’ +
-JOB_DATA.experience_levels.map(l => ‘<option value="' + l.id + '">’ + l.label + ‘</option>’).join(’’);
+JOB_DATA.experience_levels.map(function(l){ return ‘<option value="' + l.id + '">’ + l.label + ‘</option>’; }).join(’’);
 }
 
 function updateRoleDropdown() {
@@ -1437,13 +1438,13 @@ showAdminPanel();
 } else {
 const err = document.getElementById(‘adminError’);
 err.style.display = ‘block’;
-setTimeout(() => err.style.display = ‘none’, 2500);
+setTimeout(function(){ err.style.display = ‘none’; }, 2500);
 }
 }
 
 function resetForm() {
-[‘jobTitle’,‘jobLocation’,‘jobIndustry’,‘jobDesc’].forEach(id => {
-const el = document.getElementById(id);
+[‘jobTitle’,‘jobLocation’,‘jobIndustry’,‘jobDesc’].forEach(function(id){
+var el = document.getElementById(id);
 if (el) el.value = ‘’;
 });
 document.getElementById(‘jobType’).selectedIndex = 0;
@@ -1481,7 +1482,7 @@ renderPage(currentPage);
 
 function deleteJob(id) {
 if (!confirm(‘Poistetaanko ilmoitus?’)) return;
-jobs = jobs.filter(j => j.id !== id);
+jobs = jobs.filter(function(j){ return j.id !== id; });
 saveJobs();
 renderAdminJobList();
 updateJobCount();
@@ -1500,7 +1501,15 @@ if (jobs.length === 0) {
 list.innerHTML = ‘<p style="color:var(--text-muted);font-size:0.9rem;">Ei ilmoituksia vielä.</p>’;
 return;
 }
-list.innerHTML = jobs.map(j => `<div class="admin-job-item"> <div> <h4>${j.title}</h4> <p>${j.sector || ''} · 📍 ${j.location} · ${j.type}${j.level ? ' · ' + j.level : ''} · Lisätty ${j.date}</p> </div> <button class="btn-delete" onclick="deleteJob(${j.id})">Poista</button> </div>`).join(’’);
+list.innerHTML = jobs.map(function(j){
+return ‘<div class="admin-job-item">’ +
+‘<div>’ +
+‘<h4>’ + j.title + ‘</h4>’ +
+‘<p>’ + (j.sector || ‘’) + ’ · 📍 ’ + j.location + ’ · ’ + j.type + (j.level ? ’ · ’ + j.level : ‘’) + ’ · Lisätty ’ + j.date + ‘</p>’ +
+‘</div>’ +
+‘<button class="btn-delete" onclick="deleteJob(' + j.id + ')">Poista</button>’ +
+‘</div>’;
+}).join(’’);
 }
 // ──────────────────────────────────────────────────────────────
 
