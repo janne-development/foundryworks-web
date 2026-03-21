@@ -1532,12 +1532,26 @@ console.error(‘Init error:’, e);
     <div class="admin-form">
       <div class="admin-grid">
         <div class="form-group">
+          <label>Sektori *</label>
+          <select id="jobSector" onchange="updateRoleDropdown()">
+            <option value="">Valitse sektori...</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label>Tehtävänimike *</label>
-          <input type="text" id="jobTitle" placeholder="esim. Rakennusmies, Chef, Varastotyöntekijä">
+          <select id="jobTitle">
+            <option value="">Valitse ensin sektori...</option>
+          </select>
         </div>
         <div class="form-group">
           <label>Sijainti *</label>
           <input type="text" id="jobLocation" placeholder="esim. Helsinki, Tallinna, Berlin">
+        </div>
+        <div class="form-group">
+          <label>Kokemusaste</label>
+          <select id="jobLevel">
+            <option value="">Kaikki tasot</option>
+          </select>
         </div>
         <div class="form-group">
           <label>Työaika *</label>
@@ -1549,13 +1563,9 @@ console.error(‘Init error:’, e);
           </select>
         </div>
         <div class="form-group">
-          <label>Toimiala</label>
-          <input type="text" id="jobIndustry" placeholder="esim. Rakentaminen, HoReCa, Teollisuus">
+          <label>Hakuaika</label>
+          <input type="text" id="jobDeadline" placeholder="esim. 31.12.2025 tai Avoin">
         </div>
-      </div>
-      <div class="form-group">
-        <label>Lisätiedot Claudelle (vapaaehtoinen)</label>
-        <textarea id="jobNotes" placeholder="esim. Vaatii ajokortin, kokemus tarpeen, kansainvälinen tiimi, fyysinen työ..."></textarea>
       </div>
       <div class="form-group">
         <label>Ilmoituksen kuvaus *</label>
